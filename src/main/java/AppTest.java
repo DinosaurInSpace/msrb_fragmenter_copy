@@ -14,6 +14,7 @@ import org.openscience.cdk.tools.CDKHydrogenAdder;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 import ambit2.smarts.SMIRKSManager;
+//import ambit2.
 
 import org.openscience.cdk.smiles.SmilesGenerator;
 
@@ -59,6 +60,10 @@ public class AppTest
 //        System.out.println(AtomContainerManipulator.getNaturalExactMass(molecule));
 //        System.out.println("Type of this molecule: " + StructureExplorer.fin dClassName(molecule));
         Fragmenter fr = new Fragmenter();
+
+    	
+
+        
 ////        IAtomContainerSet fragments = fr.fragmentMolecule(molecule);
 ////        
 ////        for (int i = 0; i < fragments.getAtomContainerCount(); i++){

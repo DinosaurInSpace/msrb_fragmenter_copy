@@ -1,7 +1,7 @@
 package wishartlab.cfmid_plus.molecules;
 
 /**
- * @author yandj
+ * @author Yannick Djoumbou Feunang
  *
  */
 
@@ -205,7 +205,7 @@ public class StructureExplorer extends AtomContainer  {
 
 	
 	public IAtomContainer standardizeMolecule(IAtomContainer molecule) throws Exception{
-		IAtomContainer stMol =  molecule;
+		IAtomContainer stMol =  molecule.clone();
 		
 		AtomContainerManipulator.convertImplicitToExplicitHydrogens(stMol);
 

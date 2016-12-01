@@ -4,7 +4,7 @@
 package wishartlab.cfmid_plus.molecules;
 
 /**
- * @author yandj
+ * @author Yannick Djoumbou Feunang
  *
  */
 

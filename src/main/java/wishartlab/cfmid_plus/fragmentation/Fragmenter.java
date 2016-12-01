@@ -4,7 +4,7 @@
 package wishartlab.cfmid_plus.fragmentation;
 
 /**
- * @author yandj
+ * @author Yannick Djoumbou Feunang
  *
  */
 
@@ -86,7 +86,7 @@ public class Fragmenter {
 	private String host;
 	private int port;
 	StructureExplorer sExplorer = new StructureExplorer();
-	
+		
 //	static {
 //		fragmentationPatterns = new LinkedHashMap<ClassName, String[]>();
 //
@@ -313,41 +313,42 @@ public class Fragmenter {
 					"[H][#6;A;X4]1([#6;A;H2X4][#8;X2][P;X4]1(=[O;X1])[#8][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8]-[#6;X3]([#6;A;X4])=[O;X1])[#8;X2]-[#6;X3]([#6;A;X4])=[O;X1])[N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H3X4]",
 					"[H][#8;A:5][P;X4:4](=[O;X1:6])([#8:7][#6;A;H2X4:8][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18])[#8;X2:3][#6;A;H2X4:2][#6;A;X4:1]([H:99])([H])[N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20]>>[H][#8;A:5][H].[H:99][#6;A;X4:1]1([#6;A;H2X4:2][#8;X2:3][P;X4:4]1(=[O;X1:6])[#8:7][#6;A;H2X4:8][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18])[N;X4+:19]([#6;A;H3X4:20])([#6;A;H3X4:21])[#6;A;H3X4:22]"
 			},
-//			
-//				// [M+H]-sn2
-//				new String[]{
-//						"",
-//						"[#6;A;H3X4:4]!@-[N+:2](!@-[#6;A;H3X4:3])(!@-[#6;A;H3X4:1])!@-[#6;A;H2X4:5]!@-[#6;A;H2X4:6]!@-[#8;X2:7]!@-[P:8](!@-[#8;A;X2H1,X1-:9])(!@=[O;X1:10])!@-[#8;X2:11]!@-[#6;A;H2X4:12]!@-[#6:13](!@-[#6;A;H2X4:14]!@-[#8;X2:15]!@-[#6:16]([#6,#1;A:17])!@=[O;X1:18])!@-[#8;X2:19]!@-[#6:20]([#6,#1;A:21])!@=[O;X1:22]>>[H][#6:20]([#6,#1;A:21])!@=[O;X1:22].[H][#8;X2:19]!@-[#6:13](!@-[#6;A;H2X4:14]!@-[#8;X2:15]!@-[#6:16]([#6,#1;A:17])!@=[O;X1:18])!@-[#6;A;H2X4:12]!@-[#8;X2:11]!@-[P:8](!@-[#8;A;X2H1,X1-:9])(!@=[O;X1:10])!@-[#8;X2:7]!@-[#6;A;H2X4:6]!@-[#6;A;H2X4:5]!@-[N+:2](!@-[#6;A;H3X4:1])(!@-[#6;A;H3X4:3])!@-[#6;A;H3X4:4]"
-//				},
-//				// [M+H]-sn1
-//				new String[]{
-//						"",
-//						"[#6;A;X4:17][#6;X3:16](=[O;X1:18])-[#8:15][#6;A;H2X4:14][#6;A;H1X4:13]([#6;A;H2X4:12][#8:11][P;X4:8]([#8;A;X2H1,X1-:9])(=[O;X1:10])[#8;X2:7][#6;A;H2X4:6][#6;A;H2X4:5][N;X4+:2]([#6;A;H3X4:1])([#6;A;H3X4:3])[#6;A;H3X4:4])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]>>[H][#6;X3:16]([#6;A;X4:17])=[O;X1:18].[H][#8:15][#6;A;H2X4:14][#6;A;H1X4:13]([#6;A;H2X4:12][#8:11][P;X4:8]([#8;A;X2H1,X1-:9])(=[O;X1:10])[#8;X2:7][#6;A;H2X4:6][#6;A;H2X4:5][N;X4+:2]([#6;A;H3X4:4])([#6;A;H3X4:3])[#6;A;H3X4:1])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]"
-//				},
-//				// [M+H]-C3H9N (-59)
-//				new String[]{
-//						"",
+			
+				// [M+H]-sn2
+				new String[]{
+						"[H][#8;X2][#6;A;H1X4]([#6;A;H2X4][#8]-[#6;X3]([#6;A;X4])=[O;X1])[#6;A;H2X4][#8][P;X4](=[O;X1])([#8;A][H])[#8;X2][#6;A;H2X4][#6;A;X4]([H])([H])[N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H3X4]",
+						"[H][#8;A:5][P;X4:4](=[O;X1:6])([#8:7][#6;A;H2X4:8][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18])[#8;X2:3][#6;A;H2X4:2][#6;A;X4:1]([H:99])([H])[N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20]>>[H][#6;X3:16]([#6;A;X4:17])=[O;X1:18].[H][#8;X2:15][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#6;A;H2X4:8][#8:7][P;X4:4](=[O;X1:6])([#8;A:5][H])[#8;X2:3][#6;A;H2X4:2][#6;A;X4:1]([H:99])([H])[N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20]"
+				},
+				// [M+H]-sn1
+				new String[]{
+						"[H][#8][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8][P;X4](=[O;X1])([#8;A][H])[#8;X2][#6;A;H2X4][#6;A;X4]([H])([H])[N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H3X4])[#8;X2]-[#6;X3]([#6;A;X4])=[O;X1]",
+						"[H][#8;A:5][P;X4:4](=[O;X1:6])([#8:7][#6;A;H2X4:8][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18])[#8;X2:3][#6;A;H2X4:2][#6;A;X4:1]([H:99])([H])[N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20]>>[H][#6;X3:12]([#6;A;X4:13])=[O;X1:14].[H][#8:11][#6;A;H2X4:10][#6;A;H1X4:9]([#6;A;H2X4:8][#8:7][P;X4:4](=[O;X1:6])([#8;A:5][H])[#8;X2:3][#6;A;H2X4:2][#6;A;X4:1]([H:99])([H])[N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18]"
+				},
+				// [M+H]-C3H9N (-59)
+				new String[]{
+						"[H][#6;A;X4]1([H])[#6;A;H2X4][#8;X2][P;X4](=[O;X1])([#8][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8]-[#6;X3]([#6;A;X4])=[O;X1])[#8;X2]-[#6;X3]([#6;A;X4])=[O;X1])[#8;A]1",
+						"[H][#8;A:5][P;X4:4](=[O;X1:6])([#8:7][#6;A;H2X4:8][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18])[#8;X2:3][#6;A;H2X4:2][#6;A;X4:1]([H:99])([H])[N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20]>>[H][N;X4+:19]([#6;A;H3X4:22])([#6;A;H3X4:21])[#6;A;H3X4:20].[H:99][#6;A;X4:1]1([H])[#6;A;H2X4:2][#8;X2:3][P;X4:4](=[O;X1:6])([#8:7][#6;A;H2X4:8][#6;A;H1X4:9]([#6;A;H2X4:10][#8:11]-[#6;X3:12]([#6;A;X4:13])=[O;X1:14])[#8;X2:15]-[#6;X3:16]([#6;A;X4:17])=[O;X1:18])[#8;A:5]1"
 //						"[H][#8:5]!@-[P:4](!@=[O;X1:6])(!@-[#8;X2:7]!@-[#6;A;H2X4:8]!@-[#6:9](!@-[#6;A;H2X4:10]!@-[#8;X2:11]!@-[#6:12]([#6,#1;A:13])!@=[O;X1:14])!@-[#8;X2:15]!@-[#6:16]([#6,#1;A:17])!@=[O;X1:18])!@-[#8;X2:3]!@-[#6;A;H2X4:2]!@-[#6;A;X4:1]([H])([H:99])!@-[N+:19](!@-[#6;A;H3X4:20])(!@-[#6;A;H3X4:21])!@-[#6;A;H3X4:22]>>[#6;A;H3X4:22]!@-[#7:19](!@-[#6;A;H3X4:21])!@-[#6;A;H3X4:20].[H][#6;A;X4:1]1([H:99])[#6;A;H2X4:2][#8;X2:3][P:4](!@=[O;X1:6])(!@-[#8;X2:7]!@-[#6;A;H2X4:8]!@-[#6:9](!@-[#6;A;H2X4:10]!@-[#8;X2:11]!@-[#6:12]([#6,#1;A:13])!@=[O;X1:14])!@-[#8;X2:15]!@-[#6:16]([#6,#1;A:17])!@=[O;X1:18])[#8:5]1"
-//				},
+				},
 ////				"[H:99][#6;A;X4:1]([H])(!@-[#6;A;H2X4:2]!@-[#8;X2:3]!@-[P:4](!@-[#8;X1-:5])(!@=[O;X1:6])!@-[#8;X2:7]!@-[#6;A;H2X4:8]!@-[#6:9](!@-[#6;A;H2X4:10]!@-[#8;X2:11]!@-[#6:12]([#6,#1;A:13])!@=[O;X1:14])!@-[#8;X2:15]!@-[#6:16]([#6,#1;A:17])!@=[O;X1:18])!@-[N+:19](!@-[#6;A;H3X4:22])(!@-[#6;A;H3X4:21])!@-[#6;A;H3X4:20]>>[#6;A;H3X4:22]!@-[#7:19](!@-[#6;A;H3X4:21])!@-[#6;A;H3X4:20].[H][#6;A;X4:1]1([H:99])[#6;A;H2X4:2][#8;X2:3][P:4](!@=[O;X1:6])(!@-[#8;X2:7]!@-[#6;A;H2X4:8]!@-[#6:9](!@-[#6;A;H2X4:10]!@-[#8;X2:11]!@-[#6:12]([#6,#1;A:13])!@=[O;X1:14])!@-[#8;X2:15]!@-[#6:16]([#6,#1;A:17])!@=[O;X1:18])[#8:5]1",
-//				// [M+H]-sn2-H2O
-//				new String[]{
-//						"",
-//						"[H:99][#6;A;X4:1]([H])([#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5])[#6;A;X4:6]([H])([#6;A;H2X4:7][#8:8][P;X4:9]([#8;X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]>>[H][#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22].[H:99][#6;A;X4:1]([H])([#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5])[#6;A;X4:6]1([H])[#6;A;H2X4:7][#8:8][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8;X2:10]1"
-//				},
+				// [M+H]-sn2-H2O
+				new String[]{
+						"[H][#6;A;X4]([H])([#8]-[#6;X3]([#6;A;X4])=[O;X1])[#6;A;X4]1([H])[#6;A;H2X4][#8][P;X4](=[O;X1])([#8;X2][#6;A;H2X4][#6;A;H2X4][N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H3X4])[#8;X2]1",
+						"[H][#8:13][P;X4:12](=[O;X1:14])([#8;X2:15][#6;A;H2X4:16][#6;A;H2X4:17][N;X4+:18]([#6;A;H3X4:21])([#6;A;H3X4:20])[#6;A;H3X4:19])[#8:11][#6;A;X4:10]([H])([H])[#6;A;X4:8]([H:9])([#8;X2:22]-[#6;X3:23]([#6;A;X4:24])=[O;X1:25])[#6;A;X4:2]([H:3])([H:1])[#8:4]-[#6;X3:5]([#6;A;X4:6])=[O;X1:7]>>[H][#8;X2:22]-[#6;X3:23]([#6;A;X4:24])=[O;X1:25].[H:3][#6;A;X4:2]([H:1])([#8:4]-[#6;X3:5]([#6;A;X4:6])=[O;X1:7])[#6;A;X4:8]1([H:9])[#8:13][P;X4:12](=[O;X1:14])([#8;X2:15][#6;A;H2X4:16][#6;A;H2X4:17][N;X4+:18]([#6;A;H3X4:21])([#6;A;H3X4:20])[#6;A;H3X4:19])[#8:11][#6;A;X4:10]1([H])[H]"
+				},
 ////				"[H][#8;X2:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8:8][#6;A;H2X4:7][#6;A;X4:6]([H])([#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22])[#6;A;X4:1]([H:99])([H])[#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5]>>[H][#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22].[H:99][#6;A;X4:1]([H])([#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5])[#6;A;X4:6]1([H])[#6;A;H2X4:7][#8:8][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8;X2:10]1",
 //				
 //				// [M+H]-sn1-H2O
-//				new String[]{
-//						"",
-//						"[H][#8;X2:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:18])([#6;A;H3X4:17])[#6;A;H3X4:16])[#8:8][#6;A;H2X4:7][#6;A;X4:6]([H])([#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22])[#6;A;X4:1]([H])([H:99])[#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5]>>[H][#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5].[H:99][#6;A;X4:1]1([H])[#8;X2:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8:8][#6;A;H2X4:7][#6;A;X4:6]1([H])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]"
-//				},
-//				
-//				// [M+H]-C5H14NO4P (-183)
-//				new String[]{
-//						"",
-//						"[H][#6;A;X4:6]([#6;A;H2X4:1][#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5])([#6;A;H2X4:7][#8:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]>>[#6;A;X4:4][#6;X3:3](=[O;X1:5])-[#8:2][#6;A;H2X4:1][#6;A;X3:6](=[#6;A;H2X3:7])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22].[H][#8:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18]"
-//				}
+				new String[]{
+						"[H][#6;A;X4]1([H])[#8;X2][P;X4](=[O;X1])([#8;X2][#6;A;H2X4][#6;A;H2X4][N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H3X4])[#8][#6;A;H2X4][#6;A;X4]1([H])[#8;X2]-[#6;X3]([#6;A;X4])=[O;X1]",
+						"[H][#8;X2:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:18])([#6;A;H3X4:17])[#6;A;H3X4:16])[#8:8][#6;A;H2X4:7][#6;A;X4:6]([H])([#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22])[#6;A;X4:1]([H])([H:99])[#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5]>>[H][#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5].[H:99][#6;A;X4:1]1([H])[#8;X2:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8:8][#6;A;H2X4:7][#6;A;X4:6]1([H])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]"
+				},
+				
+				// [M+H]-C5H14NO4P (-183)
+				new String[]{
+						"[#6;A;X4][#6;X3](=[O;X1])-[#8][#6;A;H2X4][#6;A;X3](=[#6;A;H2X3])[#8;X2]-[#6;X3]([#6;A;X4])=[O;X1]",
+						"[H][#6;A;X4:6]([#6;A;H2X4:1][#8:2]-[#6;X3:3]([#6;A;X4:4])=[O;X1:5])([#6;A;H2X4:7][#8:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22]>>[#6;A;X4:4][#6;X3:3](=[O;X1:5])-[#8:2][#6;A;H2X4:1][#6;A;X3:6](=[#6;A;H2X3:7])[#8;X2:19]-[#6;X3:20]([#6;A;X4:21])=[O;X1:22].[H][#8:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H2X4:14][N;X4+:15]([#6;A;H3X4:16])([#6;A;H3X4:17])[#6;A;H3X4:18]"
+				}
 		});
 		
 		fragmentationPatterns.put(ClassName._1_LYSOPHOSPHATIDYLCHOLINES, new String[][]{
@@ -558,14 +559,65 @@ public class Fragmenter {
 ////				"[#8;A;H1X2:9][#6;A;H2X4:8][#6;H1X4R0:7]([#6;A;H2X4:6][#8;X2:5][P;X4:2]([#8;A;X2H1,X1-:3])([#8;A;X2H1,X1-:1])=[O;X1:4])[#8;A;X2:10][#6;R0:11]([#6,#1;A:12])=[O;X1:13]>>[H][#8;A;X1:10][H].[H][#6;R0:11]([#6,#1;A:12])=[O;X1:13].[#8;A;H1X2:9][#6;A;H2X4:8][#6;H1X4R0:7][#6;A;H2X4:6][#8;X2:5][P;X4:2]([#8;X1-:3])([#8;X1-:1])=[O;X1:4]"
 ////		});
 //		
-//		fragmentationPatterns.put(ClassName.PHOSPHATIDYLINOSITOLS, new String[]{
-//				"[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4]>>[H][#6:17]([#6,#1;A:18])=[O;X1:19].[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X1-:16])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]1[#8;A;H1X2:27]",
-//				"[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4]>>[H][#6:21]([#6,#1;A:22])=[O;X1:23].[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#8;X1-:20])[#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]1[#8;A;H1X2:27]",
-//				"[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4]>>[#8;X1-:16]-[#6:17]([#6,#1;A:18])=[O;X1:19].[#6;A;H2X4+:15][#6;A;H1X4:14]([#6;A;H2X4:13][#8;X2:12][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23]",
-//				"[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4]>>[#8;X1-:20]-[#6:21]([#6,#1;A:22])=[O;X1:23].[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4+:14][#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]1[#8;A;H1X2:27]",
-//				"[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4]>>[H][#6:17]([#6,#1;A:18])=[O;X1:19].[H][#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]1[#8;A;H1X2:6].[H][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X1-:16])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23]",
-//				"[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4]>>[H][#6:21]([#6,#1;A:22])=[O;X1:23].[#8;A;H1X2:4][#6;A;H1X4:3]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:7]([#8;X2:8])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]1[#8;A;H1X2:1].[H][P;X4:9]([#8;A;X2H1,X1-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#8;X1-:20])[#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19]"
-//		});
+		fragmentationPatterns.put(ClassName.PHOSPHATIDYLINOSITOLS, new String[][]{
+			
+			
+			// [M-H]-sn1
+			new String[]{
+					"[H][#8;X2][#6;A;H2X4][#6;A;X4]([H])([#6;A;H2X4][#8;X2][P;X4](=[O;X1])([#8;A][H])[#8;X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]1[#8;A;X2][H])[#8;X2]-[#6]([#6,#1;A])=[O;X1]",
+					"[H:1][#8;A;X2:2][#6;A;H1X4:3]1[#6;A;H1X4:30]([#8;A;X2:31][H:32])[#6;A;H1X4:27]([#8;A;X2:28][H:29])[#6;A;H1X4:10]([#8;X2:11][P;X4:12](=[O;X1:13])([#8;A:14][H])[#8;X2:15][#6;A;H2X4:16][#6;A;X4:17]([H])([#6;A;H2X4:18][#8;X2:19]-[#6:20]([#6,#1;A:21])=[O;X1:22])[#8;X2:23]-[#6:24]([#6,#1;A:25])=[O;X1:26])[#6;A;H1X4:7]([#8;A;X2:8][H:9])[#6;A;H1X4:4]1[#8;A;X2:5][H:6]>>[H][#6:20]([#6,#1;A:21])=[O;X1:22].[H][#8;X2:19][#6;A;H2X4:18][#6;A;X4:17]([H])([#6;A;H2X4:16][#8;X2:15][P;X4:12]([#8;A-:14])(=[O;X1:13])[#8;X2:11][#6;A;H1X4:10]1[#6;A;H1X4:27]([#8;A;X2:28][H:29])[#6;A;H1X4:30]([#8;A;X2:31][H:32])[#6;A;H1X4:3]([#8;A;X2:2][H:1])[#6;A;H1X4:4]([#8;A;X2:5][H:6])[#6;A;H1X4:7]1[#8;A;X2:8][H:9])[#8;X2:23]-[#6:24]([#6,#1;A:25])=[O;X1:26]"
+			},
+			
+			// [M-H]-sn2
+			new String[]{
+					"[H][#8;A;X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]([#8;X2][P;X4](=[O;X1])([#8;A][H])[#8;X2][#6;A;H2X4][#6;A;X4]([H])([#8;X2][H])[#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;H1X4]([#8;A;X2][H])[#6;A;H1X4]1[#8;A;X2][H]",
+					"[H:1][#8;A;X2:2][#6;A;H1X4:3]1[#6;A;H1X4:4]([#8;A;X2:5][H:6])[#6;A;H1X4:7]([#8;A;X2:8][H:9])[#6;A;H1X4:10]([#8;X2:11][P;X4:12](=[O;X1:13])([#8;A:14][H])[#8;X2:15][#6;A;H2X4:16][#6;A;X4:17]([H])([#6;A;H2X4:18][#8;X2:19]-[#6:20]([#6,#1;A:21])=[O;X1:22])[#8;X2:23]-[#6:24]([#6,#1;A:25])=[O;X1:26])[#6;A;H1X4:27]([#8;A;X2:28][H:29])[#6;A;H1X4:30]1[#8;A;X2:31][H:32]>>[H][#6:24]([#6,#1;A:25])=[O;X1:26].[H:1][#8;A;X2:2][#6;A;H1X4:3]1[#6;A;H1X4:4]([#8;A;X2:5][H:6])[#6;A;H1X4:7]([#8;A;X2:8][H:9])[#6;A;H1X4:10]([#8;X2:11][P;X4:12]([#8;A-:14])(=[O;X1:13])[#8;X2:15][#6;A;H2X4:16][#6;A;X4:17]([H])([#8;X2:23][H])[#6;A;H2X4:18][#8;X2:19]-[#6:20]([#6,#1;A:21])=[O;X1:22])[#6;A;H1X4:27]([#8;A;X2:28][H:29])[#6;A;H1X4:30]1[#8;A;X2:31][H:32]",
+//					"[H][#8;X1][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;H2X4][#8;X2][P;X4](=[O;X1])([#8;A][H])[#8;X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]1[#8;A;H1X2]",
+//					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25]>>[H][#6:21]([#6,#1;A:22])=[O;X1:23].[H][#8;X1:20][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#6;A;H2X4:13][#8;X2:12][P;X4:9](=[O;X1:11])([#8;A:10][H])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]1[#8;A;H1X2:6]",
+			},
+			
+			// [M-H]-sn1-H20
+			new String[]{
+					"[H][#8;A][P;X4](=[O;X1])([#8;X2][#6;A;H2X4]-[#6;A;X3]([#8;X2]-[#6]([#6,#1;A])=[O;X1])=[#6;A;X3](/[H])[H])[#8;X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]1[#8;A;H1X2]",
+					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:15]([H])([H])[#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]1[#8;A;H1X2:6]>>[#8;X1-:16]-[#6:17]([#6,#1;A:18])=[O;X1:19].[H]-[#6;A;X3:15]([H])=[#6;A;X3:14](-[#6;A;H2X4:13][#8;X2:12][P;X4:9]([#8;A-:10])(=[O;X1:11])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23]"
+			},
+			
+			// [M-H]-sn2-H20
+			new String[]{
+					"[H][#8;A][P;X4](=[O;X1])([#8;X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]1[#8;A;H1X2])[#8;X2][#6;A;X4]([H])([H])[#6;A]([H])=[#6;A;X3]([H])[#8;X2]-[#6]([#6,#1;A])=[O;X1]",
+					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]1[#8;A;H1X2:6])[#8;X2:12][#6;A;X4:13]([H])([H])[#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:15]([H])([H])[#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19]>>[#8;X1-:20]-[#6:21]([#6,#1;A:22])=[O;X1:23].[H][#6;A;X3:15]([#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])=[#6;A:14]([H])[#6;A;X4:13]([H])([H])[#8;X2:12][P;X4:9]([#8;A-:10])(=[O;X1:11])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25]"
+			},
+			
+			
+//			// [M-H]-sn1; [M-H]-sn2; [M-H]-sn1-H2O; [M-H]-sn2-H2O; [M-H]-sn1-C6H12O6; [M-H]-sn2-C6H12O6; sn2 FA; sn1 FA
+
+//			[M-H]-sn1-C6H12O6			
+			new String[]{
+					"[H][#6;A;X3](=[O;X1])[#6;A;X4]([H])([#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;X4]([H])([H])[#8;X2][P;X4]([H])([#8;A-])=[O;X1]",
+					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25])[#8;X2:12][#6;A;X4:13]([H])([H])[#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:15]([H])([H])[#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19]>>[H][#6:17]([#6,#1;A:18])=[O;X1:19].[H][#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25].[H][#6;A;X3:15](=[O;X1:16])[#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:13]([H])([H])[#8;X2:12][P;X4:9]([H])([#8;A-:10])=[O;X1:11]"
+//					"[H][P;X4]([#8;A-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X1-])[#8;X2]-[#6]([#6,#1;A])=[O;X1]",
+//					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25]>>[H][#6:17]([#6,#1;A:18])=[O;X1:19].[H][#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25].[H][P;X4:9]([#8;A-:10])(=[O;X1:11])[#8;X2:12][#6;A;H2X4:13][#6;A;H1X4:14]([#6;A;H2X4:15][#8;X1-:16])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23]"
+			},
+			
+//			[M-H]-sn2-C6H12O6
+			new String[]{
+					"[H][#6;A;X4]([H])([#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;X3](=[O;X1])[#6;A;X4]([H])([H])[#8;X2][P;X4]([H])([#8;A-])=[O;X1]",
+					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25])[#8;X2:12][#6;A;X4:13]([H])([H])[#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:15]([H])([H])[#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19]>>[H][#6:21]([#6,#1;A:22])=[O;X1:23].[#8;A;H1X2:1][#6;A;H1X4:2]1[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:7]([#8;X2:8])[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]1[#8;A;H1X2:4].[H][#6;A;X4:15]([H])([#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#6;A;X3:14](=[O;X1:20])[#6;A;X4:13]([H])([H])[#8;X2:12][P;X4:9]([H])([#8;A-:10])=[O;X1:11]"
+			},
+			// sn1-FA
+			new String[]{
+					"[#8;X1-]-[#6]([#6,#1;A])=[O;X1]",
+					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:12][#6;A;H2X4:13][#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:15]([H])([H])[#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]1[#8;A;H1X2:6]>>[#8;X1-:16]-[#6:17]([#6,#1;A:18])=[O;X1:19].[H]-[#6;A;X3:15]([H])=[#6;A;X3:14](-[#6;A;H2X4:13][#8;X2:12][P;X4:9]([#8;A-:10])(=[O;X1:11])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25])[#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23]"
+
+			},
+			
+			// sn2-FA
+			new String[]{
+					"[#8;X1-]-[#6]([#6,#1;A])=[O;X1]",
+					"[H][#8;A:10][P;X4:9](=[O;X1:11])([#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:24]([#8;A;H1X2:25])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:5]1[#8;A;H1X2:6])[#8;X2:12][#6;A;X4:13]([H])([H])[#6;A;X4:14]([H])([#8;X2:20]-[#6:21]([#6,#1;A:22])=[O;X1:23])[#6;A;X4:15]([H])([H])[#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19]>>[#8;X1-:20]-[#6:21]([#6,#1;A:22])=[O;X1:23].[H][#6;A;X3:15]([#8;X2:16]-[#6:17]([#6,#1;A:18])=[O;X1:19])=[#6;A:14]([H])[#6;A;X4:13]([H])([H])[#8;X2:12][P;X4:9]([#8;A-:10])(=[O;X1:11])[#8;X2:8][#6;A;H1X4:7]1[#6;A;H1X4:5]([#8;A;H1X2:6])[#6;A;H1X4:3]([#8;A;H1X2:4])[#6;A;H1X4:2]([#8;A;H1X2:1])[#6;A;H1X4:26]([#8;A;H1X2:27])[#6;A;H1X4:24]1[#8;A;H1X2:25]"
+
+			}
+		});
 //		
 //		
 //		fragmentationPatterns.put(ClassName.PHOSPHATIDYLGLYCEROLS, new String[]{
@@ -788,8 +840,7 @@ public class Fragmenter {
 							IAtomContainer at_k = partitions.getAtomContainer(k);
 //							AtomContainerManipulator.convertImplicitToExplicitHydrogens(at_k);
 							if(this.sExplorer.containsSmartsPattern(this.sExplorer.standardizeMolecule(at_k), fragmentationObject[0])){								
-								postprocessed_fragments.addAtomContainer( AtomContainerManipulator.removeHydrogens(partitions
-										.getAtomContainer(k))    );
+							postprocessed_fragments.addAtomContainer( AtomContainerManipulator.removeHydrogens(at_k));
 								System.out.println(sg.create(partitions.getAtomContainer(k)) + " was added.");
 							} else{
 								System.out.println(sg.create(partitions.getAtomContainer(k)) + " was NOT added.");
@@ -2307,6 +2358,23 @@ public class Fragmenter {
 		ArrayList<String> molName = new ArrayList<String>();
 		ArrayList<String> adductType = new ArrayList<String>();
 		molName.add(name);
+		
+		
+        
+//    	System.out.println("isFlagApplyStereoTransformation(): " + this.smrkMan.isFlagApplyStereoTransformation());
+//    	System.out.println("isFlagFilterEquivalentMappings() : " + this.smrkMan.isFlagFilterEquivalentMappings());
+//    	System.out.println("isFlagCheckResultStereo() : " + this.smrkMan.isFlagCheckResultStereo());
+//    	System.out.println("isFlagProcessResultStructures() : " + this.smrkMan.isFlagProcessResultStructures());	
+//		smrkMan.setFlagApplyStereoTransformation(true); 
+//		smrkMan.setFlagFilterEquivalentMappings(true);
+//		smrkMan.setFlagCheckResultStereo(true);
+//		smrkMan.setFlagProcessResultStructures(true);
+//    	System.out.println("isFlagApplyStereoTransformation(): " + this.smrkMan.isFlagApplyStereoTransformation());
+//    	System.out.println("isFlagFilterEquivalentMappings() : " + this.smrkMan.isFlagFilterEquivalentMappings());
+//    	System.out.println("isFlagCheckResultStereo() : " + this.smrkMan.isFlagCheckResultStereo());
+//    	System.out.println("isFlagProcessResultStructures() : " + this.smrkMan.isFlagProcessResultStructures());
+		
+		
 
 		IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
 		StructuralClass.ClassName type = this.sExplorer.findClassName(standardized_mol);
@@ -2363,22 +2431,22 @@ public class Fragmenter {
 				sn1_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(0)) * 100000)/100000;
 
 				// [M+H]-C3H9N (-59)
-				sn2_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(1)) * 100000)/100000;
+				sn2_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(3)) * 100000)/100000;
 				
 				// [M+H]-sn2
-				sn3_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(2)) * 100000)/100000;
+				sn3_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(1)) * 100000)/100000;
 				
 				// [M+H]-sn2-H2O
-				sn4_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(3)) * 100000)/100000;
+				sn4_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(4)) * 100000)/100000;
 				
 				// [M+H]-sn1
-				sn5_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(4)) * 100000)/100000;
+				sn5_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(2)) * 100000)/100000;
 				
 				// [M+H]-C5H14NO4P (-183)
-				sn6_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(5)) * 100000)/100000;
+				sn6_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(6)) * 100000)/100000;
 				
 				// [M+H]-sn1-H2O
-				sn7_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(6)) * 100000)/100000;
+				sn7_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(5)) * 100000)/100000;
 
 				frag_smiles_mass.add(String.format("%.5f", sn1_mass) + " " + sg.create(fragments.getAtomContainer(0)));
 				frag_smiles_mass.add(String.format("%.5f", sn2_mass + 1.0) + " " + sg.create(fragments.getAtomContainer(1)));
@@ -2394,16 +2462,16 @@ public class Fragmenter {
 					peaks.add(String.format("%.5f %5f 1 (1)",(sn2_mass + 1.0), 1.0));
 					peaks.add(String.format("%.5f %5f 2 4 (1 1)",sn3_mass, 600.0/999.0));
 					peaks.add(String.format("%.5f %5f 3 6 (1 1)",sn4_mass, 600.0/999.0));
-					peaks.add(String.format("%.5f %5f 5 (1)",sn6_mass + 1.0, 400.0/999.0));
+					peaks.add(String.format("%.5f %5f 5 (1)",sn6_mass, 400.0/999.0));
 				
 				}else{
 				
 					peaks.add(String.format("%.5f %5f 0 (1)",(sn1_mass), 400.0/999.0));
-					peaks.add(String.format("%.5f %5f 1 (1)",(sn2_mass + 1.0), 1.0));
+					peaks.add(String.format("%.5f %5f 1 (1)",(sn2_mass), 1.0));
 					peaks.add(String.format("%.5f %5f 2 (1)",sn3_mass, 600.0/999.0));
 					peaks.add(String.format("%.5f %5f 3 (1)",sn4_mass, 600.0/999.0));
 					peaks.add(String.format("%.5f %5f 4 (1)",sn5_mass, 600.0/999.0));
-					peaks.add(String.format("%.5f %5f 5 (1)",sn6_mass + 1.0, 400.0/999.0));
+					peaks.add(String.format("%.5f %5f 5 (1)",sn6_mass, 400.0/999.0));
 					peaks.add(String.format("%.5f %5f 6 (1)",sn7_mass, 600.0/999.0));
 				
 				
@@ -2435,17 +2503,17 @@ public class Fragmenter {
 				// C5H15NO4P m/z=184
 				sn4_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(3)) * 100000)/100000;			
 
-				frag_smiles_mass.add(String.format("%.5f", sn1_mass + 1.0) + " " + sg.create(fragments.getAtomContainer(0)));
-				frag_smiles_mass.add(String.format("%.5f", sn2_mass + 1.0) + " " + sg.create(fragments.getAtomContainer(1)));
-				frag_smiles_mass.add(String.format("%.5f", sn3_mass + 1.0) + " " + sg.create(fragments.getAtomContainer(2)));
-				frag_smiles_mass.add(String.format("%.5f", sn4_mass + 1.0) + " " + sg.create(fragments.getAtomContainer(3)));
+				frag_smiles_mass.add(String.format("%.5f", sn1_mass) + " " + sg.create(fragments.getAtomContainer(0)));
+				frag_smiles_mass.add(String.format("%.5f", sn2_mass) + " " + sg.create(fragments.getAtomContainer(1)));
+				frag_smiles_mass.add(String.format("%.5f", sn3_mass) + " " + sg.create(fragments.getAtomContainer(2)));
+				frag_smiles_mass.add(String.format("%.5f", sn4_mass) + " " + sg.create(fragments.getAtomContainer(3)));
 
-				peaks.add(String.format("%.5f %5f 0 (1)",(sn1_mass + 1.0), 1.0));
-				peaks.add(String.format("%.5f %5f 1 (1)",sn2_mass + 1.0, 10.0/999.0));
-				peaks.add(String.format("%.5f %5f 2 (1)",sn3_mass + 1.0, 10.0/999.0));
-				peaks.add(String.format("%.5f %5f 3 (1)",sn4_mass + 1.0, 300.0/999.0));
+				peaks.add(String.format("%.5f %5f 0 (1)",(sn1_mass), 1.0));
+				peaks.add(String.format("%.5f %5f 1 (1)",sn2_mass, 10.0/999.0));
+				peaks.add(String.format("%.5f %5f 2 (1)",sn3_mass, 10.0/999.0));
+				peaks.add(String.format("%.5f %5f 3 (1)",sn4_mass, 300.0/999.0));
 				
-				s_peaks = String.format("MW: %.5f", mass + 1.0) + "\n" + String.format("PRECURSORMZ: %.5f",mass + 1.0) + "\n" + 
+				s_peaks = String.format("MW: %.5f", mass + 1.0  ) + "\n" + String.format("PRECURSORMZ: %.5f",mass + 1.0) + "\n" + 
 						"Comment: " + String.format("Parent= %.5f", mass + 1.0)  + "; [M+H]+" + "\n" + String.format("Num Peaks: %2d",peaks.size());
 				metadata.add(s_peaks);				
 				
@@ -2927,36 +2995,36 @@ public class Fragmenter {
 				adductType.add("[M-H]-");
 				
 				sn1_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(0)) * 100000)/100000; // [M-H]-sn1
-				sn2_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(2)) * 100000)/100000; // [M-H]-sn2
-				sn3_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(4)) * 100000)/100000; // [M-H]-sn1-H2O
-				sn4_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(6)) * 100000)/100000; // [M-H]-sn2-H2O
-				sn5_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(8)) * 100000)/100000; // [M-H]-sn1-C6H12O6
-				sn6_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(11)) * 100000)/100000; // [M-H]-sn2-C6H12O6
-				sn7_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(7)) * 100000)/100000; // sn2 FA
-				sn8_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(5)) * 100000)/100000; // sn1 FA
+				sn2_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(1)) * 100000)/100000; // [M-H]-sn2
+				sn3_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(2)) * 100000)/100000; // [M-H]-sn1-H2O
+				sn4_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(3)) * 100000)/100000; // [M-H]-sn2-H2O
+				sn5_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(4)) * 100000)/100000; // [M-H]-sn1-C6H12O6
+				sn6_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(5)) * 100000)/100000; // [M-H]-sn2-C6H12O6
+				sn7_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(6)) * 100000)/100000; // sn1 FA
+				sn8_mass = Math.floor(acm.getNaturalExactMass(fragments.getAtomContainer(7)) * 100000)/100000; // sn2 FA
 				
 				frag_smiles_mass.add(String.format("%.5f", sn1_mass) + " " + sg.create(fragments.getAtomContainer(0)));
-				frag_smiles_mass.add(String.format("%.5f", sn2_mass) + " " + sg.create(fragments.getAtomContainer(2)));
-				frag_smiles_mass.add(String.format("%.5f", sn3_mass - 2.0) + " " + sg.create(fragments.getAtomContainer(4)));
-				frag_smiles_mass.add(String.format("%.5f", sn4_mass - 2.0) + " " + sg.create(fragments.getAtomContainer(6)));
-				frag_smiles_mass.add(String.format("%.5f", sn5_mass - 2.0) + " " + sg.create(fragments.getAtomContainer(8)));
-				frag_smiles_mass.add(String.format("%.5f", sn6_mass - 2.0) + " " + sg.create(fragments.getAtomContainer(11)));
-				frag_smiles_mass.add(String.format("%.5f", sn7_mass) + " " + sg.create(fragments.getAtomContainer(7)));
-				frag_smiles_mass.add(String.format("%.5f", sn8_mass) + " " + sg.create(fragments.getAtomContainer(5)));
+				frag_smiles_mass.add(String.format("%.5f", sn2_mass) + " " + sg.create(fragments.getAtomContainer(1)));
+				frag_smiles_mass.add(String.format("%.5f", sn3_mass) + " " + sg.create(fragments.getAtomContainer(2)));
+				frag_smiles_mass.add(String.format("%.5f", sn4_mass) + " " + sg.create(fragments.getAtomContainer(3)));
+				frag_smiles_mass.add(String.format("%.5f", sn5_mass) + " " + sg.create(fragments.getAtomContainer(4)));
+				frag_smiles_mass.add(String.format("%.5f", sn6_mass) + " " + sg.create(fragments.getAtomContainer(5)));
+				frag_smiles_mass.add(String.format("%.5f", sn7_mass) + " " + sg.create(fragments.getAtomContainer(6)));
+				frag_smiles_mass.add(String.format("%.5f", sn8_mass) + " " + sg.create(fragments.getAtomContainer(7)));
 				
 				if(sn7_mass == sn8_mass){
 					peaks.add(String.format("%.5f %5f 0 1 (1 1)",(sn1_mass), 999.0/999.0));
-					peaks.add(String.format("%.5f %5f 2 3 (1 1)",sn5_mass - 2.0, 200.0/999.0));
-					peaks.add(String.format("%.5f %5f 4 5 (1 1)",sn3_mass - 2.0, 400.0/999.0));
+					peaks.add(String.format("%.5f %5f 2 3 (1 1)",sn5_mass, 200.0/999.0));
+					peaks.add(String.format("%.5f %5f 4 5 (1 1)",sn3_mass, 400.0/999.0));
 					peaks.add(String.format("%.5f %5f 6 7 (1 1)",sn7_mass, 999.0/999.0));					
 
 				}else{
 					peaks.add(String.format("%.5f %5f 0 (1)",(sn1_mass), 999.0/999.0));
 					peaks.add(String.format("%.5f %5f 1 (1)",sn2_mass, 999.0/999.0));
-					peaks.add(String.format("%.5f %5f 2 (1)",sn3_mass - 2.0, 200.0/999.0));
-					peaks.add(String.format("%.5f %5f 3 (1)",sn4_mass - 2.0, 200.0/999.0));
-					peaks.add(String.format("%.5f %5f 4 (1)",sn5_mass - 2.0, 400.0/999.0));
-					peaks.add(String.format("%.5f %5f 5 (1)",sn6_mass - 2.0, 400.0/999.0));
+					peaks.add(String.format("%.5f %5f 2 (1)",sn3_mass, 200.0/999.0));
+					peaks.add(String.format("%.5f %5f 3 (1)",sn4_mass, 200.0/999.0));
+					peaks.add(String.format("%.5f %5f 4 (1)",sn5_mass, 400.0/999.0));
+					peaks.add(String.format("%.5f %5f 5 (1)",sn6_mass, 400.0/999.0));
 					peaks.add(String.format("%.5f %5f 6 (1)",sn7_mass, 999.0/999.0));
 					peaks.add(String.format("%.5f %5f 7 (1)",sn8_mass, 999.0/999.0));
 				}
