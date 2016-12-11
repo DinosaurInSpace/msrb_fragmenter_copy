@@ -256,10 +256,16 @@ public class StructureExplorer extends AtomContainer  {
 				+ "[#6;A;H2X4][#6;A;H2X4][#6;A;H3X4]>>[#6;A;H2X4][#6;A;H2X4][#6;R0](=O)[#7;A;H1X3][#6;A;H1X4]([#6;A;H2X4][#8;R0]P([#8;X1-:1])(=O)[#8][#6;A;H2X4][#6;A;H2X4][N+]([#6;A;H3X4])"
 				+ "([#6;A;H3X4])[#6;A;H3X4])[#6;A;H1X4]([#8;A;X2H1,X1-])[#6]-,=[#6][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;H2X4][#6;A;H2X4][#6;A;H2X4]"
 				+ "[#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H3X4]");
+		SMIRKSReaction carboxylTransform = smrkMan.parse("[#8;X1-:1]-[#6:2]([#6,#1;A:3])=[O;X1:4]>>[H][#8;X2:1]-[#6:2]([#6,#1;A:3])=[O;X1:4]");
+		SMIRKSReaction sulfonylTransform = smrkMan.parse("[#6:1][S;X4:2]([#8;X1-:5])(=[O;X1:3])=[O;X1:4]>>[H][#8;X2:5][S;X4:2]([#6:1])(=[O;X1:3])=[O;X1:4]");
+		
+		
 		//		System.out.println(phosphateTransform.reactantsSmarts);
 //		System.out.println(phosphateTransform2.reactantsSmarts);
 		this.standardizationReactions.add(phosphateTransform);
 		this.standardizationReactions.add(phosphateTransform2);
+//		this.standardizationReactions.add(carboxylTransform);
+		this.standardizationReactions.add(sulfonylTransform);
 		this.standardizationReactions.add(sphingomyelinTransform);
 	}
 

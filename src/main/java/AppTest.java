@@ -44,6 +44,9 @@ public class AppTest
         	IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCC(=O)OC[C@H](COP([O-])(=O)OCC(O)COP([O-])(=O)OC[C@@H](COC(=O)CCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC");
         	IAtomContainer molecule2 = sp.parseSmiles("CCCCCCCC\\C=C/CCCCCCCC(=O)O[C@H]1CC[C@]2(C)C3CC[C@]4(C)[C@H](CC[C@H]4C3CCC2=C1)[C@H](C)CCCC(C)C");
         	
+        	IAtomContainer molecule3 = sp.parseSmiles("[O-]C(CCCCCCCCCCCCCCC)=O");
+        	
+        	System.out.println("Molecule3 standardized: " + sg.create(se.standardizeMolecule(molecule3)) + "\n\n");
         	
         	
 //         System.out.println("[#6:7]-[#8;X2:1][P;X4:2]([#8;X1-:4])(=[O;X1:5])[#8;X2:3]-[#6:6]".replaceAll("\\:[0-9]+\\]", "\\]"));
@@ -92,7 +95,7 @@ public class AppTest
         
 //      IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
 //      fr.savePeakListFromSDF("data/ymdb_test.sdf",bldr,"data/ymdb_spectra.msp"); 
-		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test.sdf",bldr);
+		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test2.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/DG_IDS/DG_IDS.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/TG_IDS/TG_IDS.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/PA_IDS/PA_IDS.sdf",bldr);
