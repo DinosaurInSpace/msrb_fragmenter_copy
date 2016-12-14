@@ -95,7 +95,7 @@ public class AppTest
         
 //      IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
 //      fr.savePeakListFromSDF("data/ymdb_test.sdf",bldr,"data/ymdb_spectra.msp"); 
-		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test2.sdf",bldr);
+		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test3.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/DG_IDS/DG_IDS.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/TG_IDS/TG_IDS.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/PA_IDS/PA_IDS.sdf",bldr);
