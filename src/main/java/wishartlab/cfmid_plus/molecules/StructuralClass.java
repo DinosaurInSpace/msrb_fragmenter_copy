@@ -86,6 +86,7 @@ public class StructuralClass {
 		backbones.put(ClassName.TETRACYLATED_PHOSPHATIDYLINOSITOL_DIMANNOSIDES,"[#8;A;H1X2][#6;A;H2X4][#6;A;H1X4]1[#8][#6;A;H1X4]([#8;X2][#6;A;H1X4]2[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;X2][#6]([#6,#1;A])=[O;X1])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;X2][#6;A;H1X4]3[#8][#6;A;H1X4]([#6;A;H2X4][#8;A;X2][#6]([#6,#1;A])=[O;X1])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]3[#8;A;H1X2])[#6;A;X4]2[#8;X2][P;X4]([#8;A;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]1[#8;A;H1X2]");
 //		backbones.put(ClassName.DIPHOSPHORYLATED_HEXAACYL_LIPID_A,"");
 		backbones.put(ClassName.ACYL_CARNITINES,"[#6;A;H3X4][N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#6]([#8;A;X1-,X2H1])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1]");
+		// [#6;A;H3X4][N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H1X4]([#6;A;H2X4][#6;A;H2X4][#6]([#8;A;X1-,X2H1])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1]
 		backbones.put(ClassName.ACYL_CHOLINES,"[#6;A;H3X4]!@-[N+](!@-[#6;A;H3X4])(!@-[#6;A;H3X4])!@-[#6;A;H2X4]!@-[#6;A;H2X4]!@-[#8]!@-[#6]([#6,#1;A])!@=O");
 //		backbones.put(ClassName.LYSOPHOSPHATIDYLETHANOLAMINES,"");
 //		backbones.put(ClassName.LYSOPHOSPHATIDYLETHANOLAMINES,"");

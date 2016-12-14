@@ -246,6 +246,16 @@ public class StructureExplorer extends AtomContainer  {
 
 	}
 	
+	public static int fragmentCount(Pattern smp, IAtomContainer ac){
+		int fc = 0;
+		
+		if (smp.matches(ac)){
+			fc = smp.matchAll(ac).count();
+		}
+		
+		return fc;
+	}
+	
 	
 	private void setUpStandardizer(){
 		
@@ -258,6 +268,8 @@ public class StructureExplorer extends AtomContainer  {
 				+ "[#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H3X4]");
 		SMIRKSReaction carboxylTransform = smrkMan.parse("[#8;X1-:1]-[#6:2]([#6,#1;A:3])=[O;X1:4]>>[H][#8;X2:1]-[#6:2]([#6,#1;A:3])=[O;X1:4]");
 		SMIRKSReaction sulfonylTransform = smrkMan.parse("[#6:1][S;X4:2]([#8;X1-:5])(=[O;X1:3])=[O;X1:4]>>[H][#8;X2:5][S;X4:2]([#6:1])(=[O;X1:3])=[O;X1:4]");
+		SMIRKSReaction carnitineTransform = smrkMan.parse("[#6;A;H3X4:1][N;X4+:2]([#6;A;H3X4:3])([#6;A;H3X4:4])[#6;A;H2X4:5][#6;A;H1X4:6]([#6;A;H2X4:7][#6:8](-[#8;X1-:9])=[O;X1:10])[#8;X2:11]-"
+				+ "[#6:12]([#6,#1;A:13])=[O;X1:14]>>[H][#8;X2:9]-[#6:8](=[O;X1:10])[#6;A;H2X4:7][#6;A;H1X4:6]([#6;A;H2X4:5][N;X4+:2]([#6;A;H3X4:1])([#6;A;H3X4:3])[#6;A;H3X4:4])[#8;X2:11]-[#6:12]([#6,#1;A:13])=[O;X1:14]");
 		
 		
 		//		System.out.println(phosphateTransform.reactantsSmarts);
@@ -267,7 +279,10 @@ public class StructureExplorer extends AtomContainer  {
 //		this.standardizationReactions.add(carboxylTransform);
 		this.standardizationReactions.add(sulfonylTransform);
 		this.standardizationReactions.add(sphingomyelinTransform);
+		this.standardizationReactions.add(carnitineTransform);
+		
 	}
 
+	
 }
 
