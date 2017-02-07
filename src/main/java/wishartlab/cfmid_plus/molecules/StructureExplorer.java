@@ -177,7 +177,6 @@ public class StructureExplorer extends AtomContainer  {
 
 	}
 
-
 	public static IAtomContainer cleanMolecule(IAtomContainer molecule, SMIRKSManager smrkMan) throws Exception{
 		IAtomContainer cleaned_mol =  molecule;
 		StructuralClass.ClassName type = findClassName(molecule);
@@ -203,7 +202,6 @@ public class StructureExplorer extends AtomContainer  {
 
 	}
 
-	
 	public IAtomContainer standardizeMolecule(IAtomContainer molecule) throws Exception{
 		IAtomContainer stMol =  molecule.clone();
 		

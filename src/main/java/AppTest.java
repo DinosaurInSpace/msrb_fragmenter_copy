@@ -38,9 +38,9 @@ public class AppTest
 ////        IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCCCC(=O)N[C@@H](CO[C@@H]1OC(CO)[C@H](O)[C@H](O[C@@]2(CC(O)[C@@H](NC(C)=O)C(O2)[C@H](O)[C@H](O)CO)C(O)=O)C1O)[C@H](O)C=CCCCCCCCCCCCCC");
 //
 ////        IAtomContainer molecule = sp.parseSmiles("OCC(O)COP(O)(=O)OCC(CO(C(=O)C))O(C(=O)CC)");
-//        IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCCCC(=O)OC[C@H](COP(=O)(O)OC[C@H](CO)O)OC(=O)CCCCCCCCC/C=C\\CCCCCC");
-//        IAtomContainer molecule = sp.parseSmiles("CCCCC(=O)OC[C@H](COP(O)(=O)OC[C@@H](O)CO)OC(=O)CCCC");
-//        IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCC(=O)OC[C@H](COP(O)(=O)OCC(O)COP(O)(=O)OC[C@@H](COC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC");
+//        	IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCCCC(=O)OC[C@H](COP(=O)(O)OC[C@H](CO)O)OC(=O)CCCCCCCCC/C=C\\CCCCCC");
+//        	IAtomContainer molecule = sp.parseSmiles("CCCCC(=O)OC[C@H](COP(O)(=O)OC[C@@H](O)CO)OC(=O)CCCC");
+//        	IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCC(=O)OC[C@H](COP(O)(=O)OCC(O)COP(O)(=O)OC[C@@H](COC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC");
         	IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCC(=O)OC[C@H](COP([O-])(=O)OCC(O)COP([O-])(=O)OC[C@@H](COC(=O)CCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC");
         	IAtomContainer molecule2 = sp.parseSmiles("CCCCCCCC\\C=C/CCCCCCCC(=O)O[C@H]1CC[C@]2(C)C3CC[C@]4(C)[C@H](CC[C@H]4C3CCC2=C1)[C@H](C)CCCC(C)C");
         	
@@ -95,7 +95,7 @@ public class AppTest
         
 //      IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
 //      fr.savePeakListFromSDF("data/ymdb_test.sdf",bldr,"data/ymdb_spectra.msp"); 
-		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test3.sdf",bldr);
+		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test4.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/DG_IDS/DG_IDS.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/TG_IDS/TG_IDS.sdf",bldr);
 //		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/LipidIds/PA_IDS/PA_IDS.sdf",bldr);
