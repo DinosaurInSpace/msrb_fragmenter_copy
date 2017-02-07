@@ -83,9 +83,9 @@ public class StructureExplorer extends AtomContainer  {
 	public static StructuralClass.ClassName findClassName(IAtomContainer molecule) throws SMARTSException, CDKException{
 		StructuralClass.ClassName type = StructuralClass.ClassName.NIL;
 		for(Map.Entry<StructuralClass.ClassName, String > s : StructuralClass.backbones.entrySet()){
-			System.out.println(s);
+//			System.out.println(s);
 			if(containsSmartsPattern(molecule, s.getValue())){
-				System.err.println("THIS MOLECULE BELONGS TO THE " + s.getKey());
+//				System.err.println("THIS MOLECULE BELONGS TO THE " + s.getKey() +"\n");
 				type = s.getKey();
 				break;
 			}
