@@ -52,23 +52,17 @@ public class AppTest
 //        	IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCC(=O)OC[C@H](COP(O)(=O)OCC(O)COP(O)(=O)OC[C@@H](COC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC");
 //        IAtomContainer molecule = sp.parseSmiles("[H]O[C@]([H])(C([H])([H])OC([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])[H])C([H])([H])OP(=O)(O[H])OC([H])([H])C([H])([H])N([H])[H]");
 
-        IAtomContainer molecule = sp.parseSmiles(args[0]);
+        IAtomContainer molecule = sp.parseSmiles(molSmiles);
         
-        System.out.println("Molecule standardized: " + sg.create(se.standardizeMolecule(molecule)) + "\n\n");
+//        System.out.println("Molecule standardized: " + sg.create(se.standardizeMolecule(molecule)) + "\n\n");
 
         Fragmenter fr = new Fragmenter();
-
-//        System.out.println(FragmentationPattern.patterns.get(ClassName._1_ALKYL_GLYCEROPHOSPHOETHANOLAMINES).get("[M+H]+")[0][1]);
-        
-		AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);
-		
-//		System.out.println("MOLECULE WITH EXPLICIT HYDROGENS: " + sg.create(molecule));      
-        
-        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance(); 
-//        fr.saveSingleCfmidLikeMSPeakList(molecule,bldr,"[M+H]+");
-        fr.saveSingleCfmidLikeMSPeakList(molecule, bldr, adductType, outputName);        
-//		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test3.sdf",bldr,"[M+H]+");
-
+		AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);		
+		System.out.println("MOLECULE WITH EXPLICIT HYDROGENS: " + sg.create(molecule));      
+      
+//        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance(); 
+//        fr.saveSingleCfmidLikeMSPeakList(molecule, bldr, adductType, outputName);
+//        System.out.println("Bla bla");
     }
 	
 	

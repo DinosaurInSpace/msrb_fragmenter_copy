@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 public class StructuralClass {
 	public enum ClassName{
 		GLYCEROLIPIDS, 
-			_1_MONOACYLGLYCEROLS, _2_MONOACYLGLYCEROLS, DIACYLGLYCEROLS, TRIACYLGLYCEROLS, 	
+			_1_MONOACYLGLYCEROLS, _2_MONOACYLGLYCEROLS, _12_DIACYLGLYCEROLS, _13_DIACYLGLYCEROLS, TRIACYLGLYCEROLS, 	
 			
 			GLYCOSYLDIACYLGLYCEROLS,
 				MONOGALACTOSYLDIACYLGLYCEROLS, DIGALACTOSYLDIACYLGLYCEROLS, SULFOQUINOVOSYLDIACYLGLYCEROLS,	
@@ -41,9 +41,10 @@ public class StructuralClass {
 		
 			GLYCEROPHOSPHOSERINES,
 				PHOSPHATIDYLSERINES, 
+				PLASMENYLPHOSPHATIDYLSERINES,
 			
 		SPHINGOLIPIDS, 
-			SPHINGOMYELINS, CERAMIDE_1_PHOSPHATES, N_ACYL_SPHINGOSINES, SULFATIDES, GANGLIOSIDES, 
+			SPHINGOMYELINS, CERAMIDES, CERAMIDE_1_PHOSPHATES, N_ACYL_SPHINGOSINES, SULFATIDES, GANGLIOSIDES, 
 						
 		CHOLESTERYL_ESTERS, CHOLESTERYL_ESTERS_LANOSTERYL_OR_ZYMOSTERYL,
 		
@@ -63,7 +64,7 @@ public class StructuralClass {
 		parentChildRelationships = new LinkedHashMap<ClassName, ClassName[]>();
 		
 		parentChildRelationships.put(ClassName.GLYCEROLIPIDS,
-				new ClassName[]{ ClassName._1_MONOACYLGLYCEROLS, ClassName._2_MONOACYLGLYCEROLS, ClassName.DIACYLGLYCEROLS, ClassName.TRIACYLGLYCEROLS, ClassName.GLYCOSYLDIACYLGLYCEROLS});
+				new ClassName[]{ ClassName._1_MONOACYLGLYCEROLS, ClassName._2_MONOACYLGLYCEROLS, ClassName._12_DIACYLGLYCEROLS,  ClassName._13_DIACYLGLYCEROLS, ClassName.TRIACYLGLYCEROLS, ClassName.GLYCOSYLDIACYLGLYCEROLS});
 		
 			parentChildRelationships.put(ClassName.GLYCOSYLDIACYLGLYCEROLS,
 					new ClassName[]{ ClassName.MONOGALACTOSYLDIACYLGLYCEROLS, ClassName.DIGALACTOSYLDIACYLGLYCEROLS, ClassName.SULFOQUINOVOSYLDIACYLGLYCEROLS});
@@ -97,8 +98,14 @@ public class StructuralClass {
 			parentChildRelationships.put(ClassName.GLYCEROPHOSPHOSERINES,
 					new ClassName[]{ClassName.PHOSPHATIDYLSERINES});	
 						
-		parentChildRelationships.put(ClassName.SPHINGOLIPIDS,
-				new ClassName[]{ClassName.CHOLESTERYL_ESTERS, ClassName.CHOLESTERYL_ESTERS_LANOSTERYL_OR_ZYMOSTERYL});
+			parentChildRelationships.put(ClassName.SPHINGOLIPIDS,
+					new ClassName[]{ 
+							ClassName.CERAMIDES, ClassName.CERAMIDE_1_PHOSPHATES
+					});
+			
+			
+//		parentChildRelationships.put(ClassName.SPHINGOLIPIDS,
+//				new ClassName[]{ClassName.CHOLESTERYL_ESTERS, ClassName.CHOLESTERYL_ESTERS_LANOSTERYL_OR_ZYMOSTERYL});
 			
 		parentChildRelationships.put(ClassName.DIPHOSPHORYLATED_HEXAACYL_LIPID_A,
 				new ClassName[]{});
@@ -152,7 +159,10 @@ public class StructuralClass {
 		backbones.put(ClassName.PHOSPHATIDYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;A;H1X4]([#8;A;H1X2])[#6;A;H2X4][#8;X2][P;X4]([#8;A;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName.CARDIOLIPINS,"[#6;A;X4;H1,H2,H3][#6;X3](=O)-[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]P([#8;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#8;A;H1X2])[#6;A;H2X4][#8;X2]P([#8;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6;X3]([#6;A;X4;H1,H2,H3])=[O;X1])[#8;X2]-[#6;X3]([#6;A;X4;H1,H2,H3])=O)[#8;X2]-[#6;X3]([#6;A;X4;H1,H2,H3])=[O;X1]");
 		backbones.put(ClassName.CERAMIDE_1_PHOSPHATES,"[H][#8;A;X2][#6;A;X4]([H])([#6;A;H1X3,H2X4]-,=[#6;A;H1X3,H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;X4]([H])[H])[#6;A;X4]([H])([#7;A;X3]([H])[#6]([#6,#1;A])=[O;X1])[#6;A;X4]([H])([H])[#8]P([#8;A;X2H1,X1-])([#8;A;X2H1,X1-])=O");
-//		backbones.put(ClassName.CERAMIDE_1_PHOSPHATES,"[#6;A;X4;H2,H3][#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;A;H1X3]=[#6;A;H1X3]-[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#6;H2X4]-[#8;X2][P;X4]([#8;A;X2H1,X1-])([#8;A;X2H1,X1-])=[O;X1])[#7;A;H1X3][#6;X3]([#6,#1;A])=[O;X1]");		
+		backbones.put(ClassName.CERAMIDES,"[H][#8][#6;A;X4]([H])([H])[#6;A;X4]([H])([#7;A;X3]([H])[#6]([#6,#1;A])=[O;X1])[#6;A;X4]([H])([#6;A;H1X3,H2X4]-,=[#6;A;H1X3,H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;X4]([H])[H])[#8;A;X2][H]");
+
+		
+		//		backbones.put(ClassName.CERAMIDE_1_PHOSPHATES,"[#6;A;X4;H2,H3][#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;H2X4]-[#6;A;H1X3]=[#6;A;H1X3]-[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#6;H2X4]-[#8;X2][P;X4]([#8;A;X2H1,X1-])([#8;A;X2H1,X1-])=[O;X1])[#7;A;H1X3][#6;X3]([#6,#1;A])=[O;X1]");		
 //		backbones.put(ClassName.N_ACYL_SPHINGOSINES,"");
 //		backbones.put(ClassName.SULFATIDES,"[#6;A;X4;H2,H3][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4]-[#6;A;H1X3]=[#6;A;H1X3]-[#6;A@@H;H1X4]([#8;A;H1X2])[#6;A@H;H1X4]([#6;A;H2X4][#8][#6;A@@H;H1X4]1[#8][#6;A@H;H1X4]([#6;A;H2X4][#8;A;H1X2])[#6;A@H;H1X4]([#8;A;H1X2])[#6;A@H;H1X4]([#8]S([#8;A;X2H1,X1-])(=O)=O)[#6;A@H;H1X4]1[#8;A;H1X2])[#7;A;H1X3][#6]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName.SULFATIDES,"[#6;A;X4;H2,H3][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#6;A;H2X4][#8][#6;A;H1X4]1[#8][#6;A;H1X4]([#6;A;H2X4][#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;X2][S;X4]([#8;A;X2H1,X1-])(=[O;X1])=[O;X1])[#6;A;H1X4]1[#8;A;H1X2])[#7;A;H1X3][#6]([#6,#1;A])=[O;X1]");
@@ -170,7 +180,8 @@ public class StructuralClass {
 		
 		backbones.put(ClassName._1_MONOACYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;H1X4R0]([#8;A;H1X2])[#6;A;H2X4][#8;X2]-[#6;R0]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName._2_MONOACYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;H1X4R0]([#6;A;H2X4][#8;A;H1X2])-[#8;X2]-[#6;R0]([#6,#1;A])=[O;X1]");
-		backbones.put(ClassName.DIACYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;H1X4R0]([#6;A;H2X4][#8;X2]-[#6;R0]([#6,#1;A])=[O;X1])[#8;A;X2][#6;R0]([#6,#1;A])=[O;X1]");
+		backbones.put(ClassName._12_DIACYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;H1X4R0]([#6;A;H2X4][#8;X2]-[#6;R0]([#6,#1;A])=[O;X1])[#8;A;X2][#6;R0]([#6,#1;A])=[O;X1]");
+		backbones.put(ClassName._13_DIACYLGLYCEROLS,"[#8;A;H1X2][#6;H1X4R0]([#6;A;H2X4][#8;X2]-[#6;R0]([#6,#1;A])=[O;X1])[#6;A;H2X4][#8;A;X2][#6;R0]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName.TRIACYLGLYCEROLS,"[#6,#1;A][#6;R0](=[O;X1])-[#8;X2][#6;A;H2X4][#6;H1X4R0]([#6;A;H2X4][#8;A;X2][#6;R0]([#6,#1;A])=[O;X1])[#8;A;X2][#6;R0]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName.MONOGALACTOSYLDIACYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;A@H;H1X4]1[#8;X2][#6;A@@H;H1X4]([#8;X2][#6;A;H2X4][#6;A@@H;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A@H;H1X4]1[#8;A;H1X2]");
 		backbones.put(ClassName.DIGALACTOSYLDIACYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;A@H;H1X4]1[#8][#6;A@H;H1X4]([#8;X2][#6;A;H2X4][#6;A@H;H1X4]2[#8][#6;A@@H;H1X4]([#8;X2][#6;A;H2X4][#6;A@@H;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A@H;H1X4]([#8;A;H1X2])[#6;A@@H;H1X4]([#8;A;H1X2])[#6;A@H;H1X4]2[#8;A;H1X2])[#6;A@H;H1X4]([#8;A;H1X2])[#6;A@@H;H1X4]([#8;A;H1X2])[#6;A@H;H1X4]1[#8;A;H1X2]");
