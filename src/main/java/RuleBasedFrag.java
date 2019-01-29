@@ -1,4 +1,8 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,29 +22,56 @@ import ambit2.smarts.SMIRKSManager;
 
 import org.openscience.cdk.smiles.SmilesGenerator;
 
+import wishartlab.cfmid_plus.fragmentation.FPLists;
 import wishartlab.cfmid_plus.fragmentation.FragmentationPattern;
 import wishartlab.cfmid_plus.fragmentation.Fragmenter;
 import wishartlab.cfmid_plus.molecules.StructuralClass.ClassName;
+import wishartlab.cfmid_plus.molecules.StructuralClass;
 import wishartlab.cfmid_plus.molecules.StructureExplorer;
 
 /**
  * Hello world!
  *
  */
-public class AppTest 
+public class RuleBasedFrag 
 {
 	
     public static void main( String[] args ) throws Exception
     {
     	
     	String molSmiles 	= args[0];
-    	String adductType 	= args[1];
-    	String outputName	= args[2];
+//    	String adductType 	= args[1];
+    	String outputName	= args[1];
     			
     	
         SmilesParser sp =  new SmilesParser(SilentChemObjectBuilder.getInstance());
         SmilesGenerator sg = new SmilesGenerator().unique();
         StructureExplorer se = new StructureExplorer();
+        IAtomContainer molecule = sp.parseSmiles(molSmiles.replace("[O-]", "O"));
+        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance();
+        Fragmenter fr = new Fragmenter();
+        
+		IAtomContainer standardized_mol = se.standardizeMolecule(molecule);
+		StructuralClass.ClassName type = se.findClassName(standardized_mol);
+		System.out.println("The type of this molecule is " + String.valueOf(type));
+        
+        if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){
+            try {
+            	fr.saveSingleCfmidLikeMSPeakList(standardized_mol, bldr, type, outputName, false);
+            }
+            catch(NullPointerException e){
+            	System.err.println("Could not compute spectra for " + args[0]);
+            	System.err.println(e.getMessage());
+            }        	
+        } 
+        else{
+        	System.err.println("Could not compute spectra for " + args[0]);
+        	System.err.println("The compound does not belong to any of the covered lipid classes.");
+        }
+        
+
+        
+        
         
 ////        IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCCCC(=O)N[C@@H](CO[C@H]1[C@@H]([C@H]([C@@H]([C@H](O1)CO)O[C@H]2[C@@H]([C@H]([C@H]([C@H](O2)CO)O[C@H]3[C@@H]([C@H]([C@H]([C@H](O3)CO)O)O)NC(=O)C)O[C@@]4(C[C@@H]([C@H](C(O4)[C@@H]([C@@H](CO)O)O)NC(=O)C)O)C(=O)O)O)O)O)[C@@H](/C=C/CCCCCCCCCCCCC)O");
 ////        IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCCCC(=O)N[C@@H](CO[C@H]1C([C@H]([C@@H](C(O1)CO)O[C@H]2C([C@H]([C@H](C(O2)CO)O)O[C@@]3(CC([C@H](C(O3)[C@@H]([C@@H](CO)O)O)NC(=O)C)O)C(=O)O)O)O)O)[C@@H](/C=C/CCCCCCCCCCCCC)O");
@@ -52,17 +83,24 @@ public class AppTest
 //        	IAtomContainer molecule = sp.parseSmiles("CCCCCCCCCCCCCC(=O)OC[C@H](COP(O)(=O)OCC(O)COP(O)(=O)OC[C@@H](COC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC)OC(=O)CCCCCCCCCCCCC");
 //        IAtomContainer molecule = sp.parseSmiles("[H]O[C@]([H])(C([H])([H])OC([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])[H])C([H])([H])OP(=O)(O[H])OC([H])([H])C([H])([H])N([H])[H]");
 
-        IAtomContainer molecule = sp.parseSmiles(molSmiles);
+
         
 //        System.out.println("Molecule standardized: " + sg.create(se.standardizeMolecule(molecule)) + "\n\n");
 
-        Fragmenter fr = new Fragmenter();
-		AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);		
-		System.out.println("MOLECULE WITH EXPLICIT HYDROGENS: " + sg.create(molecule));      
+
+//		AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);		
+//		System.out.println("MOLECULE WITH EXPLICIT HYDROGENS: " + sg.create(molecule));      
       
-//        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance(); 
+
 //        fr.saveSingleCfmidLikeMSPeakList(molecule, bldr, adductType, outputName);
 //        System.out.println("Bla bla");
+    
+    
+    
+        
+    
+    
+    
     }
 	
 	

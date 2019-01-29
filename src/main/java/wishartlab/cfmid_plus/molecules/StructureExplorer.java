@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.openscience.cdk.AtomContainer;
+import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.AtomContainerSet;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.CDKException;
@@ -189,7 +190,7 @@ public class StructureExplorer extends AtomContainer  {
 //		AtomContainerManipulator.convertImplicitToExplicitHydrogens(mol_no_hydro);
 		SmilesGenerator sg = new SmilesGenerator().unique();
 		String molecule_c = sg.create(mol_no_hydro);
-		System.out.println(molecule_c);
+//		System.out.println(molecule_c);
 		
 		switch (type) {
 		case SPHINGOMYELINS:
@@ -208,15 +209,18 @@ public class StructureExplorer extends AtomContainer  {
 	public IAtomContainer standardizeMolecule(IAtomContainer molecule) throws Exception{
 		IAtomContainer stMol =  molecule.clone();
 		
-		AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(stMol);
-		AtomContainerManipulator.convertImplicitToExplicitHydrogens(stMol);
+
 		
 //		System.out.println("Before standardization: " + this.smiGen.create(stMol));
 
 		for(int i = 0; i < this.standardizationReactions.size(); i++){
-			System.out.println(this.standardizationReactions.get(i).reactantsSmarts);
+//			System.out.println(this.standardizationReactions.get(i).reactantsSmarts);
+			AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(stMol);
+			AtomContainerManipulator.convertImplicitToExplicitHydrogens(stMol);
 			while(StructureExplorer.compoundMatchesReactionConstraints(this.standardizationReactions.get(i), stMol)){
 				this.smrkMan.applyTransformation(stMol, this.standardizationReactions.get(i));
+				AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(stMol);
+				AtomContainerManipulator.convertImplicitToExplicitHydrogens(stMol);
 			}
 		}		
 		AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(stMol);
@@ -225,19 +229,61 @@ public class StructureExplorer extends AtomContainer  {
 		return stMol;
 	}
 	
+	
+//	public IAtomContainer standardizeMolecule(IAtomContainer molecule) throws Exception{
+//		IAtomContainer stMol =  molecule.clone();
+//		
+//
+//		
+//		System.out.println("Before standardization: " + this.smiGen.create(stMol));
+//
+//		for(int i = 0; i < this.standardizationReactions.size(); i++){
+//			System.out.println(this.standardizationReactions.get(i).reactantsSmarts);
+//			AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(stMol);
+//			AtomContainerManipulator.convertImplicitToExplicitHydrogens(stMol);
+//			
+////			if(StructureExplorer.compoundMatchesReactionConstraints(this.standardizationReactions.get(i), stMol)){
+////				this.smrkMan.apply
+////				.applyTransformationWithCombinedOverlappedPos(stMol, null,this.standardizationReactions.get(i));
+////				
+////			}
+//			
+//			IAtomContainerSet s = this.smrkMan.applyTransformationWithCombinedOverlappedPos(stMol, null,this.standardizationReactions.get(i));
+//			
+//			for(IAtomContainer a : s.atomContainers()){
+//				AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(a);
+//				System.err.println(this.smiGen.create(a));
+//			}
+//		}		
+//		AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(stMol);
+//		AtomContainerManipulator.convertImplicitToExplicitHydrogens(stMol);
+//		
+//		System.out.println("After standardization: " + this.smiGen.create(stMol));
+//		
+//		return stMol;
+//	}
+	
+	
+	
+	
 	public static boolean compoundMatchesReactionConstraints(SMIRKSReaction reaction,
 			IAtomContainer molecule) throws SMARTSException, CDKException, IOException {
 		boolean match = true;
 
 		IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
-//		AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(molecule);
+		AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(molecule);
 //		CDKHydrogenAdder.getInstance(molecule.getBuilder()).addImplicitHydrogens(molecule);
 		AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);
 		
 //		System.out.println(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"));
 		
 		if (match) {				
-				Pattern smp = SmartsPattern.create(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"), bldr);				
+				Pattern smp = SmartsPattern.create(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"), bldr);
+				AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(molecule);
+				AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);
+//				System.out.println(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]") );
+				SmilesGenerator smiGen = new SmilesGenerator().isomeric();
+//				System.err.println(smiGen.create(molecule));
 				boolean status = smp.matches(molecule);
 //				System.out.println("status: " + status);				
 //				SmartsPatternCDK smartsPattern = new SmartsPatternCDK(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"));
@@ -265,10 +311,10 @@ public class StructureExplorer extends AtomContainer  {
 	
 	
 	private void setUpStandardizer(){		
-		SMIRKSReaction oxygenTransform = smrkMan.parse("[#8;A;X1-:1][*,#1:2]>>[H][#8;A;X2:1][*,#1:2]");
-		SMIRKSReaction phosphateTransform = smrkMan.parse("[#8;X1-:1][P;X4:2](=[O;X1:3])([#8;X2:6]-[*,#1:7])[#8;X2:4]-[*,#1:5]>>[H][#8;X2:1][P;X4:2](=[O;X1:3])([#8;X2:6]-[*,#1:7])[#8;X2:4]-[*,#1:5]");
+		SMIRKSReaction oxygenTransform = smrkMan.parse("[#8;X1-:2]!@-[*:1]>>[H][#8;X2:2]!@-[*:1]");
+//		SMIRKSReaction phosphateTransform = smrkMan.parse("[#8;X1-:1][P;X4:2](=[O;X1:3])([#8;X2:4]-[*,#1:5])[#8;X2:6]-[*,#1:7]>>[H][#8;X2:1][P;X4:2](=[O;X1:3])([#8;X2:4]-[*,#1:5])[#8;X2:6]-[*,#1:7]");
 //		SMIRKSReaction phosphateTransform = smrkMan.parse("[#6:1]-[#8;X2:2][P;X4:3]([#8;X1-:4])(=[O;X1:5])[#8;X2:6]-[#6:7]>>[H][#8;X2:4][P;X4:3](=[O;X1:5])([#8;X2:2]-[#6:1])[#8;X2:6]-[#6:7]");
-		SMIRKSReaction phosphateTransform2 = smrkMan.parse("[#1:7]-[#8;X2:1][P;X4:2]([#8;X1-:4])(=[O;X1:5])[#8;X2:3]-[#6:6]>>[H][#8;X2:4][P;X4:2](=[O;X1:5])([#8;X2:1]-[#1:7])[#8;X2:3]-[#6:6]");				
+//		SMIRKSReaction phosphateTransform2 = smrkMan.parse("[#1:7]-[#8;X2:1][P;X4:2]([#8;X1-:4])(=[O;X1:5])[#8;X2:3]-[#6:6]>>[H][#8;X2:4][P;X4:2](=[O;X1:5])([#8;X2:1]-[#1:7])[#8;X2:3]-[#6:6]");				
 //		SMIRKSReaction sphingomyelinTransform = smrkMan.parse("[H][#8:1]P(=O)([#8][#6;A;H2X4][#6;A;H2X4][N+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H3X4])[#8;R0][#6;A;H2X4][#6;A;H1X4]([#7;A;H1X3][#6;R0]"
 //				+ "(=O)[#6;A;H2X4][#6;A;H2X4])[#6;A;H1X4]([#8;A;X2H1,X1-])[#6]-,=[#6][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4]"
 //				+ "[#6;A;H2X4][#6;A;H2X4][#6;A;H3X4]>>[#6;A;H2X4][#6;A;H2X4][#6;R0](=O)[#7;A;H1X3][#6;A;H1X4]([#6;A;H2X4][#8;R0]P([#8;X1-:1])(=O)[#8][#6;A;H2X4][#6;A;H2X4][N+]([#6;A;H3X4])"
@@ -284,8 +330,8 @@ public class StructureExplorer extends AtomContainer  {
 //		System.out.println(phosphateTransform.reactantsSmarts);
 //		System.out.println(phosphateTransform2.reactantsSmarts);
 		this.standardizationReactions.add(oxygenTransform);
-		this.standardizationReactions.add(phosphateTransform);
-		this.standardizationReactions.add(phosphateTransform2);
+//		this.standardizationReactions.add(phosphateTransform);
+//		this.standardizationReactions.add(phosphateTransform2);
 //		this.standardizationReactions.add(carboxylTransform);
 		this.standardizationReactions.add(sulfonylTransform);
 		this.standardizationReactions.add(sphingomyelinTransform);
