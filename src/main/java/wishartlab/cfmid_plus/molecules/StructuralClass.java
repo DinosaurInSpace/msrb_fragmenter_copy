@@ -28,7 +28,7 @@ public class StructuralClass {
 				_2_LYSOPHOSPHATIDYLETHANOLAMINES, PLASMENYLPHOSPHATIDYLETHANOLAMINES, PHOSPHATIDYLETHANOLAMINES,
 		 	
 			GLYCEROPHOSPHOINOSITOLS,
-				PHOSPHATIDYLINOSITOLS,
+				PHOSPHATIDYLINOSITOLS, _1_LYSOPHOSPHATIDYLINOSITOLS,
 				
 				GLYCOSYLPHOSPHATIDYLINOSITOLS,
 					DIACYLATED_PHOSPHATIDYLINOSITOL_MONOMANNOSIDES, DIACYLATED_PHOSPHATIDYLINOSITOL_DIMANNOSIDES,
@@ -54,6 +54,10 @@ public class StructuralClass {
 		ACYL_CARNITINES,
 		
 		ACYL_CHOLINES,
+		
+		FATTY_ACID_ESTERS_OF_HYDROXYL_FATTY_ACIDS,
+		
+		ETHER_LIPIDS,
 		
 		NIL, 
 	}
@@ -123,9 +127,10 @@ public class StructuralClass {
 	public static final LinkedHashMap<ClassName, String>backbones;
 	static{
 		backbones = new LinkedHashMap<ClassName, String>();
-//		backbones.put(ClassName.GLYCEROLIPIDS, "");
-//		backbones.put(ClassName.GLYCEROPHOSPHOLIPIDS, "");
-//		backbones.put(ClassName.SPHINGOLIPIDS, "");
+
+		
+		
+		
 //		backbones.put(ClassName.GLYCOSYLDIACYLGLYCEROLS, "");
 //		backbones.put(ClassName.GLYCEROPHOSPHOETHANOLAMINES, "");
 //		backbones.put(ClassName.GLYCEROPHOSPHOSERINES, "");
@@ -164,6 +169,9 @@ public class StructuralClass {
  		backbones.put(ClassName._1_O_ALKENYL_GLYCEROPHOSPHATES,"[H][#8;A][P;X4](=[O;X1])([#8;A][H])[#8;X2][#6;A;H2X4][#6;H1X4R0]([#8;A;H1X2])[#6;A;H2X4][#8;A;X2]-[#6;A;X3R0]([H])=[#6;A;X3](-[H])[#6,#1;A]");
  		backbones.put(ClassName._2_LYSOPHOSPHATIDIC_ACIDS,"[#8;A;H1X2][#6;A;H2X4][#6;H1X4R0]([#6;A;H2X4][#8;X2][P;X4]([#8;A;X2H1,X1-])([#8;A;X2H1,X1-])=[O;X1])[#8;A;X2][#6;R0]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName.PHOSPHATIDYLINOSITOLS,"[#8;A;H1X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;X2][P;X4]([#8;A;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]1[#8;A;H1X2]");
+		backbones.put(ClassName._1_LYSOPHOSPHATIDYLINOSITOLS,"[#8;H1X2][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#6;A;H2X4][#8;X2][P;X4]([#8;A;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H1X4]1[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]([#8;A;H1X2])[#6;A;H1X4]1[#8;A;H1X2]");
+		
+		
 		backbones.put(ClassName.PHOSPHATIDYLGLYCEROLS,"[#8;A;H1X2][#6;A;H2X4][#6;A;H1X4]([#8;A;H1X2])[#6;A;H2X4][#8;X2][P;X4]([#8;A;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1]");
 		backbones.put(ClassName._1_LYSOPHOSPHATIDYLGLYCEROLS, "[#8;A;H1X2][#6;A;H2X4][#6;A;H1X4]([#8;A;H1X2])[#6;A;H2X4][#8;X2][P;X4]([#8;A;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#8;H1X2])[#6;A;H2X4][#8;X2]-[#6]([#6,#1;A])=[O;X1]" );
 		backbones.put(ClassName.CARDIOLIPINS,"[#6;A;X4;H1,H2,H3][#6;X3](=O)-[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]P([#8;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#8;A;H1X2])[#6;A;H2X4][#8;X2]P([#8;X2H1,X1-])(=[O;X1])[#8;X2][#6;A;H2X4][#6;A;H1X4]([#6;A;H2X4][#8;X2]-[#6;X3]([#6;A;X4;H1,H2,H3])=[O;X1])[#8;X2]-[#6;X3]([#6;A;X4;H1,H2,H3])=O)[#8;X2]-[#6;X3]([#6;A;X4;H1,H2,H3])=[O;X1]");
@@ -204,7 +212,26 @@ public class StructuralClass {
 		// [#6;A;H3X4][N;X4+]([#6;A;H3X4])([#6;A;H3X4])[#6;A;H1X4]([#6;A;H2X4][#6;A;H2X4][#6]([#8;A;X1-,X2H1])=[O;X1])[#8;X2]-[#6]([#6,#1;A])=[O;X1]
 		backbones.put(ClassName.ACYL_CHOLINES,"[#6;A;H3X4]!@-[N+](!@-[#6;A;H3X4])(!@-[#6;A;H3X4])!@-[#6;A;H2X4]!@-[#6;A;H2X4]!@-[#8]!@-[#6]([#6,#1;A])!@=O");
 //		backbones.put(ClassName.NIL,"");
+
+		backbones.put(ClassName.GLYCEROLIPIDS, "[$([OX1-,OX2H1,$([OX2](-[CX4])[CX4;R0;H2]),$([OX2]-[CX3]=[CX3]),$([OX2]-[CX3](=O)-[#1,#6])][#6;A;H2X4R0][#6;A;H1X4R0]([OX1-,OX2H1,$([OX2](-[CX4])[CX4;R0;H2]),$([OX2]-[CX3]=[CX3]),$([OX2]-[CX3](=O)-[#1,#6])])[#6;A;H2X4R0][#8]-[CX4,$([CX3]=[CX3]),$([CX3](=O)-[#1,#6])]),$([OX1-,OX2H1,$([OX2](-[CX4])[CX4;R0;H2]),$([OX2]-[CX3]=[CX3]),$([OX2]-[CX3](=O)-[#1,#6])][#6;A;H2X4R0][#6;A;H1X4R0]([#6;A;H2X4R0][OX1-,OX2H1,$([OX2](-[CX4])[CX4;R0;H2]),$([OX2]-[CX3]=[CX3]),$([OX2]-[CX3](=O)-[#1,#6])])[#8;X2]-[CX4,$([CX3]=[CX3]),$([CX3](=O)-[#1,#6])])]");
+		backbones.put(ClassName.GLYCEROPHOSPHOLIPIDS, 				"["
+				+ "$([#8]P([!#1!#6;OX1-,OX2H1,$([O]-[#6])])(=O)[#8;R0][#6;A;H2X4R0][#6;A;H1X4R0]([R0;OX1-,OX2H1,$([OX2]-[#1,CX4,$(C(=O)-[#1,#6])])])[#6;A;H2X4R0][R0;OX1-,OX2H1,$([OX2]-[#1,CX4,$(C(=O)-[#1,#6])])]),"
+				+ "$([#8]P([!#1!#6;OX1-,OX2H1,$([O]-[#6])])(=O)[#8;R0][#6;A;H2X4R0][#6;A;X3R0](=O)[#6;A;H2X4R0][R0;OX1-,OX2H1,$([OX2]-[#1,CX4,$(C(=O)-[#1,#6])])])]");
+		backbones.put(ClassName.SPHINGOLIPIDS, 				"["
+				+ "$([#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H1X4]([#8;A;X2H1,X1-])[#6;A;H1X4]([!#1!#6;NX4H3+,NX3H2,$([#7X3]C(=O)C)])[#6;A;H2X4][#8]),"
+				+ "$([H][#6]([#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4])-,=[#6]([H])[#6;A;H2X4]C([H])([#1,OX2H1])[#6;H1X3]=[#6;H1X3][#6;A;H1X4]([#8;A;X2H1,X1-])[#6;A;H1X4]([!#1!#6;NX4H3+,NX3H2,$([#7X3]C(=O)C)])[#6;A;H2X4][#8]),"
+				// 	5-hydroxy,3E-sphingosine (LMSP01080004)
+				+ "$([H][#8]C([H])([#6;A;H2X4][#6]([H])-,=[#6]([H])[#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4][#6;A;H2X4])[#6;H1X3]=[#6;H1X3][#6;A;H1X4]([!#1!#6;NX4H3+,NX3H2,$([#7X3]C(=O)C)])[#6;A;H2X4][#8])"
+				+ "]");
 		
+		backbones.put(ClassName.ETHER_LIPIDS,
+				"[$([#8;X2][#6;A;H2X4]!@-[#6;A;X4](!@-[!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])])!@-[#6;A;H2X4][!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])]),"
+				+ "$([#8]!@-[#6;A;X4](!@-[#6;A;H2X4][!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])])!@-[#6;A;H2X4][!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])]),"
+				+ "$([!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])][#6;A;H2X4]!@-[#6;A;X3](!@=[O;X1])!@-[#6;A;H2X4][!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])]),"
+				+ "$([#8;X2][#6;A;H2X4]!@-[#6;A;X3](!@=[O;X1])!@-[#6;A;H2X4][!#1!#6;$([OX2H1]),$([OX2]-[CX4H2]-[#6;A])])"
+				+ "]"
+				
+				);		
 	}
 
 }

@@ -239,8 +239,9 @@ public class Fragmenter {
 //				.patterns.keySet());
 				
 		if(type != StructuralClass.ClassName.NIL && FPLists.classSpecificFragmentationPatterns.get(type).containsKey(adductType)){
-//			IAtomContainer stMol = this.sExplorer.standardizeMolecule(molecule);
-			SmilesGenerator sg = new SmilesGenerator().isomeric();
+			new SmilesGenerator();
+			//			IAtomContainer stMol = this.sExplorer.standardizeMolecule(molecule);
+			SmilesGenerator sg = SmilesGenerator.isomeric();
 			
 			for(Map.Entry<String, String[]> pattern : FPLists.classSpecificFragmentationPatterns.get(type).get(adductType)
 					.patterns.entrySet()){
@@ -255,13 +256,13 @@ public class Fragmenter {
 //					 System.out.println("Nr of metabolites: " + String.valueOf(current_set.getAtomContainerCount()));	
 //					 System.out.println("Nr of unique metabolites: " + String.valueOf(this.sExplorer.uniquefy(current_set).getAtomContainerCount()));					 
 					 
-					 IAtomContainerSet current_set_unique = this.sExplorer.uniquefy(current_set);
+					 IAtomContainerSet current_set_unique = StructureExplorer.uniquefy(current_set);
 					 
 					 for(IAtomContainer atc : current_set_unique.atomContainers()){
-						 IAtomContainerSet partitions = this.sExplorer.partition(atc);
+						 IAtomContainerSet partitions = StructureExplorer.partition(atc);
 
 						 	for(IAtomContainer partition : partitions.atomContainers()){
-						 		if(this.sExplorer.containsSmartsPattern(partition, pattern.getValue()[0])){
+						 		if(StructureExplorer.containsSmartsPattern(partition, pattern.getValue()[0])){
 //								if(this.sExplorer.containsSmartsPattern(this.sExplorer.standardizeMolecule(partition), pattern.getValue()[0])){
 									if(pattern.getValue().length==2){
 										fragments.put(pattern.getKey(), AtomContainerManipulator.removeHydrogens(partition));
@@ -283,7 +284,7 @@ public class Fragmenter {
 						 	}
 						}
 					} else{
-						
+						// TO DO
 					}				
 				}
 
@@ -299,7 +300,7 @@ public class Fragmenter {
 		
 		if(fragments != null){
 			for(Map.Entry<String, IAtomContainer> fragment :  fragments.entrySet()){
-				System.err.println(fragment.getKey());
+				//System.err.println(fragment.getKey());
 				fmasses.put(fragment.getKey(), 
 						Math.floor(StructureExplorer.getMajorIsotopeMass(fragment.getValue()) * 100000)/100000);		
 			}
@@ -469,7 +470,7 @@ public class Fragmenter {
 		if(fragCondition.getCollisionEnergy() == 10 || fragCondition.getCollisionEnergy() == 20 || fragCondition.getCollisionEnergy() == 40) {
 			IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
 //			System.out.println("The standardized molecule is " + this.sGen.create(standardized_mol));
-			StructuralClass.ClassName type = this.sExplorer.findClassName(standardized_mol);
+			StructuralClass.ClassName type = StructureExplorer.findClassName(standardized_mol);
 //			System.out.println("The type of this molecule is " + String.valueOf(type));
 			LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, fragCondition.getAdductName());
 			
@@ -486,7 +487,7 @@ public class Fragmenter {
 		LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
 		
 		IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
-		StructuralClass.ClassName type = this.sExplorer.findClassName(standardized_mol);
+		StructuralClass.ClassName type = StructureExplorer.findClassName(standardized_mol);
 //		System.out.println("The type of this molecule is " + String.valueOf(type));
 		LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, adductType);
 		FragmentationCondition fragCondition_10 =  new FragmentationCondition(adductType, 10);
@@ -500,27 +501,152 @@ public class Fragmenter {
 		return annotatedPeaks;
 	}
 
+	public void saveSingleCfmidLikeMSPeakList(IAtomContainer molecule, IChemObjectBuilder bldr, String outputname, ArrayList<String> adduct_types) throws Exception{	
+		IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
+		StructuralClass.ClassName type = StructureExplorer.findClassName(standardized_mol);
+//		System.out.println("The type of this molecule is " + String.valueOf(type));
+
+        if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){
+            saveSingleCfmidLikeMSPeakList(standardized_mol, bldr, outputname, type, adduct_types);  	
+        } 
+        else{
+        	
+        	if(type == ClassName.GLYCEROLIPIDS || type == ClassName.GLYCEROPHOSPHOLIPIDS || type == ClassName.SPHINGOLIPIDS 
+        			|| type == ClassName.CERAMIDE_1_PHOSPHATES || type == ClassName.DIPHOSPHORYLATED_HEXAACYL_LIPID_A ||
+        			type == ClassName.SULFATIDES || type == ClassName.FATTY_ACID_ESTERS_OF_HYDROXYL_FATTY_ACIDS ||
+        			type == ClassName.ETHER_LIPIDS
+        			){            	
+    			System.out.println("\nSTATUS REPORT = 4\nThe compound belongs to the lipid class of " + type + ", which is not covered "
+    					+ "in the current version of the fragmenter.");       		
+        	}
+        	else{
+    			System.out.println("\nSTATUS REPORT = 5\nInvalid chemical class. The query compound does not belong to any of the classes covered "
+    					+ "in the current version of the fragmenter.");         		
+        	}
+        		
+
+
+        }
+	}
+	
+	public void saveSingleCfmidLikeMSPeakList(IAtomContainer molecule, IChemObjectBuilder bldr, String outputname, StructuralClass.ClassName type, ArrayList<String> adduct_types) throws Exception{
+		ArrayList<String> adduct_types_valid = new ArrayList<String>();
+		ArrayList<String> adduct_types_invalid = new ArrayList<String>();
+		for(String adduct : adduct_types){
+			if(FPLists.classSpecificFragmentationPatterns.get(type).keySet().contains(adduct)){
+				adduct_types_valid.add(adduct);
+			}else{
+				adduct_types_invalid.add(adduct);
+			}
+		}
+		System.out.println(adduct_types_valid.size() < adduct_types.size());
+		if(adduct_types_valid.size() < adduct_types.size()){
+			if(adduct_types.size() == 1){			
+				System.out.println(
+					"\nSTATUS REPORT = 3\nThe following adducts are not covered for the class of " + type + ": " +
+							Arrays.toString(adduct_types_invalid.toArray()) + "\n"
+									+ "Next Step: Predicting MS spectra for covered adduct types: "
+									+ Arrays.toString(FPLists.classSpecificFragmentationPatterns.get(type).keySet().toArray())
+						);
+				saveSingleCfmidLikeMSPeakList(molecule, bldr, type, outputname, false);
+			}else{
+				System.out.println(
+						"\nSTATUS REPORT = 2\nThe following adducts are not covered for the class of " + type + ": " +
+								Arrays.toString(adduct_types_invalid.toArray()) + "\n"
+										+ "Next Step: Predicting MS spectra for remaining adduct types: "
+										+ Arrays.toString(adduct_types_valid.toArray())
+				);
+				for(String adt : adduct_types_valid){
+					System.out.println("Generating peak list for the adduct type: " + String.valueOf(adt));
+					LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
+					LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(molecule, type, adt);
+					FragmentationCondition fragCondition_10 =  new FragmentationCondition(adt, 10);
+					FragmentationCondition fragCondition_20 =  new FragmentationCondition(adt, 20);
+					FragmentationCondition fragCondition_40 =  new FragmentationCondition(adt, 40);
+					
+					annotatedPeaks.put(10, annotatePeakList(fragments ,type, fragCondition_10));
+					annotatedPeaks.put(20,	annotatePeakList(fragments ,type, fragCondition_20));
+					annotatedPeaks.put(40, annotatePeakList(fragments ,type, fragCondition_40));
+					
+					String[] outputnameSplit = outputname.split(Pattern.quote("."));
+//					System.err.println(outputnameSplit.length);
+					String destination = outputnameSplit[0];
+					if(outputnameSplit.length>0){
+						destination = outputnameSplit[0] + "_" + adt + "." + outputnameSplit[1];
+					}
+					else{
+						destination = outputnameSplit[0] + "_" + adt;
+					}
+					
+					saveSingleCfmidLikeMSAnnotatedPeakList(annotatedPeaks, adt, destination);
+					System.out.println("Saving spectrum to " + destination);
+				}				
+			}
+			
+		} else{
+				System.out.println("\nSTATUS REPORT = 1\nEach specified adduct is covered for the class of " + type + ". "
+						+ "Next Step: Predicting MS spectra for the following adduct types: "
+						+ Arrays.toString(adduct_types_valid.toArray())
+				);
+				for(String adduct : adduct_types){
+					System.out.println("Generating peak list for the adduct type: " + String.valueOf(adduct));
+					LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
+					LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(molecule, type, adduct);
+//					System.out.println(fragments.keySet().size());
+//					for(String x : fragments.keySet()){
+//						System.out.println(x);
+//						System.out.println(fragments.get(x)==null);
+//					}
+					FragmentationCondition fragCondition_10 =  new FragmentationCondition(adduct, 10);
+					FragmentationCondition fragCondition_20 =  new FragmentationCondition(adduct, 20);
+					FragmentationCondition fragCondition_40 =  new FragmentationCondition(adduct, 40);
+					
+					annotatedPeaks.put(10, annotatePeakList(fragments ,type, fragCondition_10));
+					annotatedPeaks.put(20,	annotatePeakList(fragments ,type, fragCondition_20));
+					annotatedPeaks.put(40, annotatePeakList(fragments ,type, fragCondition_40));
+					
+					String[] outputnameSplit = outputname.split(Pattern.quote("."));
+//					System.err.println(outputnameSplit.length);
+					String destination = outputnameSplit[0];
+					if(outputnameSplit.length>0){
+						destination = outputnameSplit[0] + "_" + adduct + "." + outputnameSplit[1];
+					}
+					else{
+						destination = outputnameSplit[0] + "_" + adduct;
+					}					
+					saveSingleCfmidLikeMSAnnotatedPeakList(annotatedPeaks, adduct, destination);
+					System.out.println("Saving spectrum to " + destination );
+				}				
+		}
+	}
+	
+	
+	
 
 	public void saveSingleCfmidLikeMSPeakList(IAtomContainer molecule, IChemObjectBuilder bldr, String outputname) throws Exception{
 		IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
-		StructuralClass.ClassName type = this.sExplorer.findClassName(standardized_mol);
-//		System.out.println("The type of this molecule is " + String.valueOf(type));
+		StructuralClass.ClassName type = StructureExplorer.findClassName(standardized_mol);
+		System.out.println("The type of this molecule is " + String.valueOf(type));
 
-		for(String adduct : FPLists.classSpecificFragmentationPatterns.get(type).keySet()){
-			System.out.println("Generating peak list for the adduct type: " + String.valueOf(adduct));
-			LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
-			LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, adduct);
-			FragmentationCondition fragCondition_10 =  new FragmentationCondition(adduct, 10);
-			FragmentationCondition fragCondition_20 =  new FragmentationCondition(adduct, 20);
-			FragmentationCondition fragCondition_40 =  new FragmentationCondition(adduct, 40);
-			
-			annotatedPeaks.put(10, annotatePeakList(fragments ,type, fragCondition_10));
-			annotatedPeaks.put(20,	annotatePeakList(fragments ,type, fragCondition_20));
-			annotatedPeaks.put(40, annotatePeakList(fragments ,type, fragCondition_40));
-			
-			saveSingleCfmidLikeMSAnnotatedPeakList(annotatedPeaks, adduct, (outputname + "_" + adduct));
-			System.out.println("Saving spectrum to " + (outputname + "_" + adduct) );
-		}
+		saveSingleCfmidLikeMSPeakList(standardized_mol, bldr, type, outputname, false);
+		
+//		if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){			
+//			for(String adduct : FPLists.classSpecificFragmentationPatterns.get(type).keySet()){
+//				System.out.println("Generating peak list for the adduct type: " + String.valueOf(adduct));
+//				LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
+//				LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, adduct);
+//				FragmentationCondition fragCondition_10 =  new FragmentationCondition(adduct, 10);
+//				FragmentationCondition fragCondition_20 =  new FragmentationCondition(adduct, 20);
+//				FragmentationCondition fragCondition_40 =  new FragmentationCondition(adduct, 40);
+//				
+//				annotatedPeaks.put(10, annotatePeakList(fragments ,type, fragCondition_10));
+//				annotatedPeaks.put(20,	annotatePeakList(fragments ,type, fragCondition_20));
+//				annotatedPeaks.put(40, annotatePeakList(fragments ,type, fragCondition_40));
+//				
+//				saveSingleCfmidLikeMSAnnotatedPeakList(annotatedPeaks, adduct, (outputname + "_" + adduct));
+//				System.out.println("Saving spectrum to " + (outputname + "_" + adduct) );
+//			}			
+//		}
 	}
 
 	
@@ -530,36 +656,52 @@ public class Fragmenter {
 		if(standardize){
 			standardized_mol = this.sExplorer.standardizeMolecule(molecule);
 		}
-
-		for(String adduct : FPLists.classSpecificFragmentationPatterns.get(type).keySet()){
-			System.out.println("Generating peak list for the adduct type: " + String.valueOf(adduct));
-			LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
-			LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, adduct);
-			FragmentationCondition fragCondition_10 =  new FragmentationCondition(adduct, 10);
-			FragmentationCondition fragCondition_20 =  new FragmentationCondition(adduct, 20);
-			FragmentationCondition fragCondition_40 =  new FragmentationCondition(adduct, 40);
-			
-			annotatedPeaks.put(10, annotatePeakList(fragments ,type, fragCondition_10));
-			annotatedPeaks.put(20,	annotatePeakList(fragments ,type, fragCondition_20));
-			annotatedPeaks.put(40, annotatePeakList(fragments ,type, fragCondition_40));
-			
-			String[] outputnameSplit = outputname.split(Pattern.quote("."));
-			System.err.println(outputnameSplit.length);
-			String destination = outputnameSplit[0];
-			if(outputnameSplit.length>0){
-				destination = outputnameSplit[0] + "_" + adduct + "." + outputnameSplit[1];
-			}
-			else{
-				destination = outputnameSplit[0] + "_" + adduct;
-			}
-			
-			
-			saveSingleCfmidLikeMSAnnotatedPeakList(annotatedPeaks, adduct, destination);
-
+//		System.out.println("HEY");
+		if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){
+			for(String adduct : FPLists.classSpecificFragmentationPatterns.get(type).keySet()){
+				System.out.println("Generating peak list for the adduct type: " + String.valueOf(adduct));
+				LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
+				LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, adduct);
+				FragmentationCondition fragCondition_10 =  new FragmentationCondition(adduct, 10);
+				FragmentationCondition fragCondition_20 =  new FragmentationCondition(adduct, 20);
+				FragmentationCondition fragCondition_40 =  new FragmentationCondition(adduct, 40);
 				
+				annotatedPeaks.put(10, annotatePeakList(fragments ,type, fragCondition_10));
+				annotatedPeaks.put(20,	annotatePeakList(fragments ,type, fragCondition_20));
+				annotatedPeaks.put(40, annotatePeakList(fragments ,type, fragCondition_40));
 				
-			System.out.println("Saving spectrum to " + destination);
+				String[] outputnameSplit = outputname.split(Pattern.quote("."));
+//				System.err.println(outputnameSplit.length);
+				String destination = outputnameSplit[0];
+				if(outputnameSplit.length>0){
+					destination = outputnameSplit[0] + "_" + adduct + "." + outputnameSplit[1];
+				}
+				else{
+					destination = outputnameSplit[0] + "_" + adduct;
+				}
+
+				saveSingleCfmidLikeMSAnnotatedPeakList(annotatedPeaks, adduct, destination);
+
+				System.out.println("Saving spectrum to " + destination);
+			}			
 		}
+		else{
+        	if(type == ClassName.GLYCEROLIPIDS || type == ClassName.GLYCEROPHOSPHOLIPIDS || type == ClassName.SPHINGOLIPIDS 
+       			|| type == ClassName.CERAMIDE_1_PHOSPHATES || type == ClassName.DIPHOSPHORYLATED_HEXAACYL_LIPID_A ||
+        			type == ClassName.SULFATIDES || type == ClassName.FATTY_ACID_ESTERS_OF_HYDROXYL_FATTY_ACIDS ||
+        			type == ClassName.ETHER_LIPIDS
+        			){            	
+    			System.out.println("\nSTATUS REPORT = 4\nThe compound belongs to the lipid class of " + type + ", which is not covered "
+    					+ "in the current version of the fragmenter.");       		
+        	}
+        	else{
+    			System.out.println("\nSTATUS REPORT = 5\nInvalid chemical class. The query compound does not belong to any of the classes covered "
+    					+ "in the current version of the fragmenter.");         		
+       	}
+        }
+		
+		
+
 	}
 	
 	
@@ -621,8 +763,7 @@ public class Fragmenter {
 //				name = "molecule_" + String.valueOf(mol_nr);
 //				
 //			}
-			
-			
+	
 			if(peaksResults != null) {
 				
 				FileWriter fw = new FileWriter(outputname);

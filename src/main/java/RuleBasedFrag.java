@@ -1,14 +1,27 @@
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.MissingOptionException;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.InvalidSmilesException;
+import org.openscience.cdk.inchi.InChIGenerator;
+import org.openscience.cdk.inchi.InChIGeneratorFactory;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IAtomContainerSet;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
@@ -19,6 +32,7 @@ import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 import ambit2.smarts.SMIRKSManager;
 //import ambit2.
+import utils.FileUtilities;
 
 import org.openscience.cdk.smiles.SmilesGenerator;
 
@@ -36,38 +50,318 @@ import wishartlab.cfmid_plus.molecules.StructureExplorer;
 public class RuleBasedFrag 
 {
 	
+	public RuleBasedFrag(){
+		
+	}
+	static String VERSION = "1.0.7";
+	
+	private static Options generateOptions(){
+		
+		final Option smiInputOption = Option.builder("ismi")
+				.required(false)
+				.hasArg(true)
+				.argName("SMILES Input")
+				.longOpt("ismiles")
+				.desc("The input, which can be a SMILES string")
+				.build();
+		
+		final Option sdfInputOption = Option.builder("isdf")
+				.required(false)
+				.hasArg(true)
+				.argName("Sdf Input")
+				.longOpt("sdfinput")
+				.desc("Accept the input as a SD file. You must enter an output filename")
+				.build();
+		
+		final Option adductTypes = Option.builder("a")
+				.required(false)
+				.hasArg(true)
+				.argName("Adduct types")
+				.longOpt("adducts")
+				.desc("A semicolon-separated list of adduct types to consider for fragmentation. ")
+				.build();	
+		
+		final Option outputDestinationOption = Option.builder("o")
+				.required(false)
+				.hasArg(true)
+				.argName("Spectra Destination")
+				.longOpt("output")
+				.desc("Destination for the created spectra files. If -ismi is select and the output is specified, this must be a file. If -sdf is selected and the output is specified, this must be an existing folder.")
+				.build();		
+	
+		final Option helpOption = Option.builder("h")
+				.required(false)
+				.hasArg(false)
+				.argName("help")
+				.longOpt("help")
+				.desc("Prints the usage.")
+				.build();	
+		
+		final Options options = new Options();
+		options.addOption(smiInputOption);
+		options.addOption(sdfInputOption);		
+		options.addOption(adductTypes);
+		options.addOption(outputDestinationOption);
+		options.addOption(helpOption);
+		
+		return options;
+	}
+	
+	public static CommandLine generateCommandLine(
+			final Options options, final String[] commandLineArguments) throws ParseException{
+			final CommandLineParser cmdLineParser = new DefaultParser();
+			CommandLine commandLine = null;
+			
+			String header ="This is msrb-fragmenter-"+VERSION + ". It is a tool that uses a rule-based fragmentation algorithm to predict ESI-MS/MS spectra at 10eV, 20eV, and 40 eV."
+					+ " The library of fragmentation rules currently covers 24 classes of lipids and seven adduct types.";
+			String footer ="";			
+			HelpFormatter formatter = new HelpFormatter();
+			
+			try{
+				commandLine = cmdLineParser.parse(options, commandLineArguments);
+			}
+			catch (MissingOptionException missingOptionException){
+				
+				if( Arrays.asList(commandLineArguments).contains("-h") || Arrays.asList(commandLineArguments).contains("--help")){
+					formatter.printHelp("\njava -jar msrb-fragmenter-"+VERSION + ".jar --help", header, options, footer, true);
+				}
+				else {
+					System.out.println(missingOptionException.getLocalizedMessage());
+				}			
+			}
+			catch (ParseException parseException){
+				System.out.println("Could not parse the command line arguments "
+						+ Arrays.toString(commandLineArguments) + "\nfor the following reaons:" 
+						+ parseException);
+			}			
+			
+			return commandLine;
+		}	
+	
+	
     public static void main( String[] args ) throws Exception
     {
+		Options options = generateOptions();
+		CommandLine commandLine = generateCommandLine(options, args);
+
+//		System.out.println(commandLine.getOptionValue("b"));
+//		System.out.println(commandLine.getOptionValue("f").length());
+//		System.out.println(commandLine.getOptionValue("m"));
+		
+		String iFormat = null;
+		IAtomContainer singleInput = null;
+		String inputFileName = null;   	
+		String adducts = null;
+    	String outputName	= null;
     	
-    	String molSmiles 	= args[0];
+
+
+//    	if(!(Arrays.asList(args).contains("-ismi") || Arrays.asList(args)
+//				.contains("--ismiles") || Arrays.asList(args).contains("-isdf") 
+//				|| Arrays.asList(args).contains("--sdfinput"))){
+//    		throw new MissingOptionException("You must specify a format");
+ //   	}
+//    	
+    	
+    	if(Arrays.asList(args).contains("-ismi") || Arrays.asList(args)
+    			.contains("--ismiles")){
+    		iFormat = "smiles";
+    	}
+    	
+    	else if(Arrays.asList(args).contains("-isdf") || Arrays.asList(args)
+				.contains("--sdfinput")){
+			iFormat = "sdf";
+		}
+    	
+    	if(Arrays.asList(args).contains("-a")|| Arrays.asList(args)
+				.contains("--adducts")){
+    		adducts = commandLine.getOptionValue("a");
+	    	if( adducts == null){
+	    		throw new MissingOptionException("Missing argument for option 'a'. Using this option requires that the user specifies a list of adducts. "
+	    				+ "If the '-a' option is not used, then only selected adducts will be considered, based on the query compound's chemical class.");
+	    	}
+    	}
+    	
+    	if(Arrays.asList(args).contains("-o")|| Arrays.asList(args)
+				.contains("--output")){
+    		outputName = commandLine.getOptionValue("o");
+    	}
+    	
+		if(commandLine !=null){
+			
+			IChemObjectBuilder 	builder = SilentChemObjectBuilder.getInstance();
+			SmilesParser	smiParser		= new SmilesParser(builder);
+	        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance();
+	        Fragmenter fr = new Fragmenter();	
+	        InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
+
+
+	        if(adducts == null || adducts.contains("all;") || adducts.contains(";all")){
+				if(commandLine.getOptionValue("ismi") != null){
+					String molSmiles = commandLine.getOptionValue("ismi");
+					singleInput = smiParser.parseSmiles(molSmiles.replace("[O-]", "O"));
+					
+					if(outputName == null){
+						InChIGenerator gen = factory.getInChIGenerator(singleInput);
+						outputName = gen.getInchiKey()+".log";
+					}
+					
+					try{
+						
+						fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName);
+					}
+		            catch(NullPointerException e){
+		            	System.err.println("Could not compute spectra for " + molSmiles);
+		            	System.err.println(e.getMessage());
+		            }
+
+				}
+				else if(commandLine.getOptionValue("isdf") != null){
+					
+					inputFileName = commandLine.getOptionValue("isdf");
+					if(inputFileName == null){
+						throw new MissingOptionException("You must be specify an input file name (Molfile or SDF). For more information, type java -jar biotransformer-1.0.8 --help.");
+					} else{				
+						File file = new File(inputFileName);
+						if((!file.exists()) & file.isDirectory()){
+							throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
+						}else{
+							
+							if(outputName != null){
+								File directory_ = new File(outputName);
+								if(!(file.exists() & directory_.exists())){
+									throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
+								}
+								
+							}else{
+								outputName = new File("").getAbsolutePath();
+							}
+							
+							IAtomContainerSet atContainers = FileUtilities.parseSdfAndAddTitles(inputFileName, factory);
+							int counter = 0;
+							
+							for(IAtomContainer atc : atContainers.atomContainers()){
+								counter++;
+								try{
+									fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
+								}
+					            catch(NullPointerException e){
+					            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
+					            	System.err.println(e.getMessage());
+					            }								
+							}
+	
+						}
+					}
+					
+					
+				}
+					
+				}
+				else{					
+					ArrayList<String> adduct_list = new ArrayList<String>();
+					if(adducts != null){
+						adduct_list = new ArrayList<String>(Arrays.asList(adducts.split(";")));
+					}
+					
+					if(commandLine.getOptionValue("ismi") != null){
+						String molSmiles = commandLine.getOptionValue("ismi");
+						singleInput = smiParser.parseSmiles(molSmiles.replace("[O-]", "O"));
+						
+						if(outputName == null){
+							InChIGenerator gen = factory.getInChIGenerator(singleInput);
+							outputName = gen.getInchiKey()+".log";
+						}
+						//System.out.println("NIL ATOM CONTAINER: " + (singleInput.isEmpty()));
+						//SmilesGenerator sg = new SmilesGenerator().unique();
+						//System.out.println(sg.create(singleInput));
+//						try{
+							fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName, adduct_list);
+//						}
+//			            catch(NullPointerException e){
+//			            	System.err.println("Could not compute spectra for " + molSmiles);
+//			            	System.err.println(e.getMessage());
+//			            }
+
+					}
+					else if(commandLine.getOptionValue("isdf") != null){
+						inputFileName = commandLine.getOptionValue("isdf");
+						if(inputFileName == null){
+							throw new MissingOptionException("You must be specify an input file name (Molfile or SDF). For more information, type java -jar biotransformer-1.0.8 --help.");
+						} else{				
+							File file = new File(inputFileName);
+							if((!file.exists()) & file.isDirectory()){
+								throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
+							}else{
+								
+								if(outputName != null){
+									File directory_ = new File(outputName);
+									if(!(file.exists() & directory_.exists())){
+										throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
+									}
+									
+								}else{
+									outputName = new File("").getAbsolutePath();
+								}
+								
+								IAtomContainerSet atContainers = FileUtilities.parseSdfAndAddTitles(inputFileName, factory);
+								int counter = 0;
+								
+								for(IAtomContainer atc : atContainers.atomContainers()){
+									counter++;
+									try{
+										fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
+										fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log", adduct_list);
+									
+									}
+						            catch(NullPointerException e){
+						            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
+						            	System.err.println(e.getMessage());
+						            }								
+								}
+		
+							}
+						}
+
+					}					
+				}
+			}
+	
+		
+		
+		
+		
+		
+//    	String molSmiles 	= args[0];
 //    	String adductType 	= args[1];
-    	String outputName	= args[1];
-    			
-    	
-        SmilesParser sp =  new SmilesParser(SilentChemObjectBuilder.getInstance());
-        SmilesGenerator sg = new SmilesGenerator().unique();
-        StructureExplorer se = new StructureExplorer();
-        IAtomContainer molecule = sp.parseSmiles(molSmiles.replace("[O-]", "O"));
-        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance();
-        Fragmenter fr = new Fragmenter();
-        
-		IAtomContainer standardized_mol = se.standardizeMolecule(molecule);
-		StructuralClass.ClassName type = se.findClassName(standardized_mol);
-		System.out.println("The type of this molecule is " + String.valueOf(type));
-        
-        if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){
-            try {
-            	fr.saveSingleCfmidLikeMSPeakList(standardized_mol, bldr, type, outputName, false);
-            }
-            catch(NullPointerException e){
-            	System.err.println("Could not compute spectra for " + args[0]);
-            	System.err.println(e.getMessage());
-            }        	
-        } 
-        else{
-        	System.err.println("Could not compute spectra for " + args[0]);
-        	System.err.println("The compound does not belong to any of the covered lipid classes.");
-        }
+//    	String outputName	= args[1];
+//    			
+//  	
+//	
+//  	SmilesParser sp =  new SmilesParser(SilentChemObjectBuilder.getInstance());
+//        SmilesGenerator sg = new SmilesGenerator().unique();
+//       StructureExplorer se = new StructureExplorer();
+//        IAtomContainer molecule = sp.parseSmiles(molSmiles.replace("[O-]", "O"));
+//        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance();
+//        Fragmenter fr = new Fragmenter();
+//        
+//		IAtomContainer standardized_mol = se.standardizeMolecule(molecule);
+//		StructuralClass.ClassName type = se.findClassName(standardized_mol);
+//		System.out.println("The type of this molecule is " + String.valueOf(type));
+//       
+//        if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){
+//            try {
+//            	fr.saveSingleCfmidLikeMSPeakList(standardized_mol, bldr, type, outputName, false);
+//            }
+//            catch(NullPointerException e){
+//            	System.err.println("Could not compute spectra for " + args[0]);
+//            	System.err.println(e.getMessage());
+//            }        	
+//        } 
+//        else{
+//        	System.err.println("Could not compute spectra for " + args[0]);
+//        	System.err.println("The compound does not belong to any of the covered lipid classes.");
+//       }
         
 
         
