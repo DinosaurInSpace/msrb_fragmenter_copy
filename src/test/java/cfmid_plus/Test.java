@@ -51,8 +51,8 @@ public class Test {
 		
 	}
 	public static void main(String[] args) throws Exception{
-		add_mass("/Users/yandj/Programming/Projects/SpectraPrediction/data/CASMI_Compounds/CASMI2016_Cat2and3_Challenge.txt", 
-				"/Users/yandj/Programming/Projects/SpectraPrediction/data/CASMI_Compounds/CASMI2016_Cat2and3_Challenge_with_mass.txt");
+//		add_mass("/Users/yandj/Programming/Projects/SpectraPrediction/data/CASMI_Compounds/CASMI2016_Cat2and3_Challenge.txt", 
+//				"/Users/yandj/Programming/Projects/SpectraPrediction/data/CASMI_Compounds/CASMI2016_Cat2and3_Challenge_with_mass.txt");
         
         
         

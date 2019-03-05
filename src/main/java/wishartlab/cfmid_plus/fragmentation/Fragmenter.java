@@ -800,87 +800,11 @@ public class Fragmenter {
 				bw.close();	
 				fw.close();
 			}
-			
-
-		
-			
-			
-//			if(peaks.size() != 0){
-//
-//				
-////				FileWriter fw = new FileWriter("data/" + outputname.replace("/", "_") + ".log");
-//				
-////				System.out.println("Path : " + file.getAbsolutePath());
-//				
-//				
-//
-//			
-//				bw.newLine();
-//				
-//				// saving the fragment list
-//				for(int k = 0; k < frags.size(); k++){
-//					bw.write(k +" " + frags.get(k));
-//					bw.newLine();
-//				}
-//				bw.newLine();
-//				bw.write(peaksResults.get("adductType").get(0));
-//				bw.newLine();
-//				
-//				bw.close();	
-//				fw.close();
-//				fmol ++;
-//			} else{
-//				bwerr.write(name);
-//				bwerr.newLine();
-//
-//			}
 
 		fwerr.close();
 
 //		System.out.println("Total nr. of fragmented molecules: " + String.valueOf(fmol));
 	}
-//
-//	
-//    public static void main( String[] args ) throws Exception
-//    {
-////    	AtomContainerManipulator acm = new AtomContainerManipulator();
-////    	SmilesParser sp = new SmilesParser(SilentChemObjectBuilder.getInstance());
-////    	IAtomContainer li = sp.parseSmiles("[Li]");
-////    	System.out.println(Math.floor(acm.getNaturalExactMass(li) * 100000)/100000);
-////    	System.out.println(acm.getNaturalExactMass(li));
-//    	
-//    	
-//    	
-////    	String molSmiles 	= args[0];
-////    	String adductType 	= args[1];
-////    	String outputName	= args[2];
-//    	
-////    	String molSmilesPC_16_0-18_1 	= "C[N+](C)(C)CCOP(O)(=O)OCC(CO(C(=O)CCCCCCCCCCCCCCC))O(C(=O)CCCCCCCC=CCCCCCCCC)";
-////    	String molSmilesPI_18_1_9Z = "O[C@H]1[C@H](O)[C@@H](O)[C@H](OP(O)(=O)OC[C@@H](CO(C(=O)CCCCCCCC=CCCCCCCCC))O(C(=O)CCCCCCCC=CCCCCCCCC))[C@H](O)[C@@H]1O";    	
-////    	String molSmilesLPC_14_0 = "[H][C@@](O)(COC(=O)CCCCCCCCCCCCC)COP([O-])(=O)OCC[N+](C)(C)C";
-//    	
-////    	String molSmilesPlamalogen_18_0_18_1_9Z.log = "CCCCCCCCCCCCCCCCC=COC[C@]([H])(COP([O-])(=O)OCC[N+](C)(C)C)OC(=O)CCCCCCCC=CCCCCCCCC";
-//    	
-//    	String molSmiles = "CCCCCCCCCCCCCC=C[C@@H](O)[C@H](COP([O-])(=O)OCC[N+](C)(C)C)NC(=O)CCCCCCCC=CCCCCCCCC";
-//    	String adductType 	= "M+";
-//    	String outputName	= "data/SM18_1_9Z.log";
-//    	
-//    	Fragmenter fr = new Fragmenter();
-//
-//        SmilesParser sp =  new SmilesParser(SilentChemObjectBuilder.getInstance());
-//        SmilesGenerator sg = new SmilesGenerator().unique();
-//        StructureExplorer se = new StructureExplorer();
-//        IAtomContainer molecule = sp.parseSmiles(molSmiles);
-//        
-//        System.out.println("Molecule standardized: " + sg.create(se.standardizeMolecule(molecule)) + "\n\n");
-//        
-//		AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);        
-//        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance(); 
-//        fr.saveSingleCfmidLikeMSPeakList(molecule, bldr, adductType, outputName);        
-//		fr.saveSingleCfmidLikeMSPeakListFromSDF("data/test3.sdf",bldr,"[M+H]+");
-//
-//    }
-	
-	
+
 }
 
