@@ -53,7 +53,7 @@ public class RuleBasedFrag
 	public RuleBasedFrag(){
 		
 	}
-	static String VERSION = "1.0.7";
+	static String VERSION = "1.0.8";
 	
 	private static Options generateOptions(){
 		
@@ -95,7 +95,31 @@ public class RuleBasedFrag
 				.argName("help")
 				.longOpt("help")
 				.desc("Prints the usage.")
+				.build();
+		
+		final Option classifyOption = Option.builder("c")
+				.required(false)
+				.hasArg(false)
+				.argName("Classify")
+				.longOpt("classify")
+				.desc("Find the class of a compound (Limited to 20 chemical categories so far.")
+				.build();		
+
+		final Option nopredictOption = Option.builder("n")
+				.required(false)
+				.hasArg(false)
+				.argName("No Predict")
+				.longOpt("nopredict")
+				.desc("Do not predict spectra. This will work only if the classify option is selected.")
 				.build();	
+		
+//		final Option versionOption = Option.builder("v")
+//				.required(false)
+//				.hasArg(false)
+//				.argName("version")
+//				.longOpt("version")
+//				.desc("Prints the version.")
+//				.build();
 		
 		final Options options = new Options();
 		options.addOption(smiInputOption);
@@ -103,6 +127,8 @@ public class RuleBasedFrag
 		options.addOption(adductTypes);
 		options.addOption(outputDestinationOption);
 		options.addOption(helpOption);
+		options.addOption(classifyOption);
+		options.addOption(nopredictOption);
 		
 		return options;
 	}
@@ -112,18 +138,22 @@ public class RuleBasedFrag
 			final CommandLineParser cmdLineParser = new DefaultParser();
 			CommandLine commandLine = null;
 			
-			String header ="This is msrb-fragmenter-"+VERSION + ". It is a tool that uses a rule-based fragmentation algorithm to predict ESI-MS/MS spectra at 10eV, 20eV, and 40 eV."
-					+ " The library of fragmentation rules currently covers 24 classes of lipids and seven adduct types.";
-			String footer ="";			
+			String header ="This is version "+ VERSION +" of msrb-fragmenter. " + ". It is a tool that uses a rule-based fragmentation algorithm to predict ESI-MS/MS spectra at 10eV, 20eV, and 40 eV."
+					+ " The library of fragmentation rules currently covers 21 classes of lipids and seven adduct types.";
+			String footer ="For more information/help, contact cfmid@wishartlab.com.";
+			
 			HelpFormatter formatter = new HelpFormatter();
 			
 			try{
 				commandLine = cmdLineParser.parse(options, commandLineArguments);
+				if( Arrays.asList(commandLineArguments).contains("-h") || Arrays.asList(commandLineArguments).contains("--help")){
+					formatter.printHelp("\njava -jar msrb-fragmenter.jar --help", header, options, footer, true);
+				}
 			}
 			catch (MissingOptionException missingOptionException){
 				
 				if( Arrays.asList(commandLineArguments).contains("-h") || Arrays.asList(commandLineArguments).contains("--help")){
-					formatter.printHelp("\njava -jar msrb-fragmenter-"+VERSION + ".jar --help", header, options, footer, true);
+					formatter.printHelp("\njava -jar msrb-fragmenter.jar --help", header, options, footer, true);
 				}
 				else {
 					System.out.println(missingOptionException.getLocalizedMessage());
@@ -153,6 +183,9 @@ public class RuleBasedFrag
 		String inputFileName = null;   	
 		String adducts = null;
     	String outputName	= null;
+    	boolean nopredict = false;
+    	boolean classify = false;
+    	
     	
 
 
@@ -182,10 +215,26 @@ public class RuleBasedFrag
 	    	}
     	}
     	
+    	if((Arrays.asList(args).contains("-n") || Arrays.asList(args).contains("--nopredict")) &&
+    			!(Arrays.asList(args).contains("-c") || Arrays.asList(args).contains("--classify")
+    			)) {
+    		throw new MissingOptionException("No task selected. You must select at least one of the two tasks: MS-spectra prediction or classify. "
+    										+ "To only classify, select both the -n and -c options.\n");
+    	}
+    	
     	if(Arrays.asList(args).contains("-o")|| Arrays.asList(args)
 				.contains("--output")){
     		outputName = commandLine.getOptionValue("o");
     	}
+    	
+    	if(Arrays.asList(args).contains("-n") || Arrays.asList(args).contains("--nopredict")){
+    		nopredict = true;
+    	}
+    	
+    	if(Arrays.asList(args).contains("-c") || Arrays.asList(args).contains("--classify")){
+    		classify=true;
+    	}
+    	
     	
 		if(commandLine !=null){
 			
@@ -194,24 +243,20 @@ public class RuleBasedFrag
 	        IChemObjectBuilder bldr = DefaultChemObjectBuilder.getInstance();
 	        Fragmenter fr = new Fragmenter();	
 	        InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
-
-
-	        if(adducts == null || adducts.contains("all;") || adducts.contains(";all")){
+	        
+	        
+	        if(classify){
+	        	
 				if(commandLine.getOptionValue("ismi") != null){
 					String molSmiles = commandLine.getOptionValue("ismi");
 					singleInput = smiParser.parseSmiles(molSmiles.replace("[O-]", "O"));
 					
-					if(outputName == null){
-						InChIGenerator gen = factory.getInChIGenerator(singleInput);
-						outputName = gen.getInchiKey()+".log";
-					}
 					
-					try{
-						
-						fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName);
+					try{						
+						System.out.println("Chemical Class = " + StructureExplorer.findClassName(singleInput));
 					}
 		            catch(NullPointerException e){
-		            	System.err.println("Could not compute spectra for " + molSmiles);
+		            	System.err.println("Could not classify the compound wth smiles " + molSmiles);
 		            	System.err.println(e.getMessage());
 		            }
 
@@ -242,8 +287,16 @@ public class RuleBasedFrag
 							
 							for(IAtomContainer atc : atContainers.atomContainers()){
 								counter++;
+								String title = atc.getProperty(CDKConstants.TITLE);
 								try{
-									fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
+									System.out.println(counter + " - Chemical Class : " + StructureExplorer.findClassName(atc));
+//									if(title != null){
+//										System.out.println(title + " - Chemical Class : " + StructureExplorer.findClassName(atc));
+//									}
+//									else{
+//										System.out.println(counter + " - Chemical Class : " + StructureExplorer.findClassName(atc));
+//									}
+									
 								}
 					            catch(NullPointerException e){
 					            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
@@ -256,14 +309,12 @@ public class RuleBasedFrag
 					
 					
 				}
-					
-				}
-				else{					
-					ArrayList<String> adduct_list = new ArrayList<String>();
-					if(adducts != null){
-						adduct_list = new ArrayList<String>(Arrays.asList(adducts.split(";")));
-					}
-					
+
+	        	
+	        }
+	        
+	        if(nopredict == false){
+		        if(adducts == null || adducts.contains("all;") || adducts.contains(";all")){
 					if(commandLine.getOptionValue("ismi") != null){
 						String molSmiles = commandLine.getOptionValue("ismi");
 						singleInput = smiParser.parseSmiles(molSmiles.replace("[O-]", "O"));
@@ -272,19 +323,19 @@ public class RuleBasedFrag
 							InChIGenerator gen = factory.getInChIGenerator(singleInput);
 							outputName = gen.getInchiKey()+".log";
 						}
-						//System.out.println("NIL ATOM CONTAINER: " + (singleInput.isEmpty()));
-						//SmilesGenerator sg = new SmilesGenerator().unique();
-						//System.out.println(sg.create(singleInput));
-//						try{
-							fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName, adduct_list);
-//						}
-//			            catch(NullPointerException e){
-//			            	System.err.println("Could not compute spectra for " + molSmiles);
-//			            	System.err.println(e.getMessage());
-//			            }
-
+						
+						try{
+							
+							fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName);
+						}
+			            catch(NullPointerException e){
+			            	System.err.println("Could not compute spectra for " + molSmiles);
+			            	System.err.println(e.getMessage());
+			            }
+	
 					}
 					else if(commandLine.getOptionValue("isdf") != null){
+						
 						inputFileName = commandLine.getOptionValue("isdf");
 						if(inputFileName == null){
 							throw new MissingOptionException("You must be specify an input file name (Molfile or SDF). For more information, type java -jar biotransformer-1.0.8 --help.");
@@ -311,8 +362,6 @@ public class RuleBasedFrag
 									counter++;
 									try{
 										fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
-										fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log", adduct_list);
-									
 									}
 						            catch(NullPointerException e){
 						            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
@@ -322,12 +371,82 @@ public class RuleBasedFrag
 		
 							}
 						}
-
-					}					
-				}
+						
+						
+					}
+						
+					}
+					else{					
+						ArrayList<String> adduct_list = new ArrayList<String>();
+						if(adducts != null){
+							adduct_list = new ArrayList<String>(Arrays.asList(adducts.split(";")));
+						}
+						
+						if(commandLine.getOptionValue("ismi") != null){
+							String molSmiles = commandLine.getOptionValue("ismi");
+							singleInput = smiParser.parseSmiles(molSmiles.replace("[O-]", "O"));
+							
+							
+							if(outputName == null){
+								InChIGenerator gen = factory.getInChIGenerator(singleInput);
+								outputName = gen.getInchiKey()+".log";
+							}
+							//System.out.println("NIL ATOM CONTAINER: " + (singleInput.isEmpty()));
+							//SmilesGenerator sg = new SmilesGenerator().unique();
+							//System.out.println(sg.create(singleInput));
+	//						try{
+								fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName, adduct_list);
+	//						}
+	//			            catch(NullPointerException e){
+	//			            	System.err.println("Could not compute spectra for " + molSmiles);
+	//			            	System.err.println(e.getMessage());
+	//			            }
+	
+						}
+						else if(commandLine.getOptionValue("isdf") != null){
+							inputFileName = commandLine.getOptionValue("isdf");
+							if(inputFileName == null){
+								throw new MissingOptionException("You must be specify an input file name (Molfile or SDF). For more information, type java -jar biotransformer-1.0.8 --help.");
+							} else{				
+								File file = new File(inputFileName);
+								if((!file.exists()) & file.isDirectory()){
+									throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
+								}else{
+									
+									if(outputName != null){
+										File directory_ = new File(outputName);
+										if(!(file.exists() & directory_.exists())){
+											throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
+										}
+										
+									}else{
+										outputName = new File("").getAbsolutePath();
+									}
+									
+									IAtomContainerSet atContainers = FileUtilities.parseSdfAndAddTitles(inputFileName, factory);
+									int counter = 0;
+									
+									for(IAtomContainer atc : atContainers.atomContainers()){
+										counter++;
+										try{
+											fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
+											fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log", adduct_list);
+										
+										}
+							            catch(NullPointerException e){
+							            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
+							            	System.err.println(e.getMessage());
+							            }								
+									}
+			
+								}
+							}
+	
+						}					
+					}
 			}
 	
-
+		}
     }
 
 }

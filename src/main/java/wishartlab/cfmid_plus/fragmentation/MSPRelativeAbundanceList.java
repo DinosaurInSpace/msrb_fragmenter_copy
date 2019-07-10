@@ -1610,7 +1610,7 @@ public class MSPRelativeAbundanceList {
 			
 			
 			/*
-			 * Plasemenyl-Phosphatidylcholines
+			 * Plasmenyl-Phosphatidylcholines
 			 * http://lipidmaps.org/data/standards/fetch_gif_mult.php?MASS=794&LM_ID=LMGP01030012&TRACK_ID=232
 			 * http://lipidmaps.org/data/standards/fetch_gif_mult.php?MASS=818&LM_ID=LMGP01030014&TRACK_ID=519
 			 * http://lipidmaps.org/data/standards/fetch_gif_mult.php?MASS=828&LM_ID=LMGP01030012&TRACK_ID=231
