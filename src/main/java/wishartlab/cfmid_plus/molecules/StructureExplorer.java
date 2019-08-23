@@ -267,6 +267,7 @@ public class StructureExplorer extends AtomContainer  {
 	}
 
 	public IAtomContainer standardizeMolecule(IAtomContainer molecule) throws Exception{
+//		System.out.println("Before standardization: " + this.smiGen.create(molecule));
 		IAtomContainer stMol =  molecule.clone();
 		
 
@@ -338,10 +339,12 @@ public class StructureExplorer extends AtomContainer  {
 //		System.out.println(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"));
 		
 		if (match) {				
+//				System.out.println(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"));
 				Pattern smp = SmartsPattern.create(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]"), bldr);
 				AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(molecule);
+				CDKHydrogenAdder adder = CDKHydrogenAdder.getInstance(molecule.getBuilder());
+				adder.addImplicitHydrogens(molecule);
 				AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);
-//				System.out.println(reaction.reactantsSmarts.replaceAll("\\:[0-9]+\\]", "\\]") );
 				SmilesGenerator smiGen = new SmilesGenerator().isomeric();
 //				System.err.println(smiGen.create(molecule));
 				boolean status = smp.matches(molecule);

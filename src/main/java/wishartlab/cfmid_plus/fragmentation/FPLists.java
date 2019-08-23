@@ -72,7 +72,7 @@ public class FPLists {
 				"[Li+]"
 		});		
 		_1_mg.put("[M+Li]+", new FragmentationPattern(ClassName._1_MONOACYLGLYCEROLS, _1_mg_m_li));
-		System.out.println(_1_mg.get("[M+Li]+").getFragmentList());		
+//		System.out.println(_1_mg.get("[M+Li]+").getFragmentList());		
 		 
 		_1_mg_m_nh4.put("[M+NH4]+", new String[]{
 				"[H][#8;A;X2][#6;A;H2X4][#6;H1X4R0]([#8;A;X2][H])[#6;A;H2X4][#8;X2]-[#6;R0]([#6,#1;A])=[O;X1]",

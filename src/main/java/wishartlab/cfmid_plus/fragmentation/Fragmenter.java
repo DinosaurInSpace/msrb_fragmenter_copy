@@ -204,8 +204,8 @@ public class Fragmenter {
         long t1 = System.nanoTime();        
         fr.saveSingleCfmidLikeMSPeakList(molecule, fr.bldr, adductType, outputName);
         long t2 = System.nanoTime();
-        System.out.println(AtomContainerManipulator.getTotalFormalCharge(molecule));
-        System.out.println("Execution time: " + ((t2 - t1) * 1e-6) + " milliseconds");
+//        System.out.println(AtomContainerManipulator.getTotalFormalCharge(molecule));
+//        System.out.println("Execution time: " + ((t2 - t1) * 1e-6) + " milliseconds");
 	}
 	
 	
@@ -516,11 +516,11 @@ public class Fragmenter {
         			type == ClassName.SULFATIDES || type == ClassName.FATTY_ACID_ESTERS_OF_HYDROXYL_FATTY_ACIDS ||
         			type == ClassName.ETHER_LIPIDS
         			){            	
-    			System.out.println("\nSTATUS REPORT = 4\nThe compound belongs to the lipid class of " + type + ", which is not covered "
+    			System.out.println("STATUS REPORT = 4\nThe compound belongs to the lipid class of " + type + ", which is not covered "
     					+ "in the current version of the fragmenter.");       		
         	}
         	else{
-    			System.out.println("\nSTATUS REPORT = 5\nInvalid chemical class. The query compound does not belong to any of the classes covered "
+    			System.out.println("STATUS REPORT = 5\nInvalid chemical class. The query compound does not belong to any of the classes covered "
     					+ "in the current version of the fragmenter.");         		
         	}
         		
@@ -539,11 +539,11 @@ public class Fragmenter {
 				adduct_types_invalid.add(adduct);
 			}
 		}
-		System.out.println(adduct_types_valid.size() < adduct_types.size());
+//		System.out.println(adduct_types_valid.size() < adduct_types.size());
 		if(adduct_types_valid.size() < adduct_types.size()){
 			if(adduct_types.size() == 1){			
 				System.out.println(
-					"\nSTATUS REPORT = 3\nThe following adducts are not covered for the class of " + type + ": " +
+					"STATUS REPORT = 3\nThe following adducts are not covered for the class of " + type + ": " +
 							Arrays.toString(adduct_types_invalid.toArray()) + "\n"
 									+ "Next Step: Predicting MS spectra for covered adduct types: "
 									+ Arrays.toString(FPLists.classSpecificFragmentationPatterns.get(type).keySet().toArray())
@@ -551,7 +551,7 @@ public class Fragmenter {
 				saveSingleCfmidLikeMSPeakList(molecule, bldr, type, outputname, false);
 			}else{
 				System.out.println(
-						"\nSTATUS REPORT = 2\nThe following adducts are not covered for the class of " + type + ": " +
+						"STATUS REPORT = 2\nThe following adducts are not covered for the class of " + type + ": " +
 								Arrays.toString(adduct_types_invalid.toArray()) + "\n"
 										+ "Next Step: Predicting MS spectra for remaining adduct types: "
 										+ Arrays.toString(adduct_types_valid.toArray())
@@ -584,7 +584,7 @@ public class Fragmenter {
 			}
 			
 		} else{
-				System.out.println("\nSTATUS REPORT = 1\nEach specified adduct is covered for the class of " + type + ". "
+				System.out.println("STATUS REPORT = 1\nEach specified adduct is covered for the class of " + type + ". "
 						+ "Next Step: Predicting MS spectra for the following adduct types: "
 						+ Arrays.toString(adduct_types_valid.toArray())
 				);
@@ -626,7 +626,7 @@ public class Fragmenter {
 	public void saveSingleCfmidLikeMSPeakList(IAtomContainer molecule, IChemObjectBuilder bldr, String outputname) throws Exception{
 		IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
 		StructuralClass.ClassName type = StructureExplorer.findClassName(standardized_mol);
-		System.out.println("The type of this molecule is " + String.valueOf(type));
+//		System.out.println("The type of this molecule is " + String.valueOf(type));
 
 		saveSingleCfmidLikeMSPeakList(standardized_mol, bldr, type, outputname, false);
 		
@@ -658,7 +658,9 @@ public class Fragmenter {
 		}
 //		System.out.println("HEY");
 		if(FPLists.classSpecificFragmentationPatterns.containsKey(type)){
+//			System.out.println("\nSTATUS REPORT = 0\nPRedicting spectra for all applicable adducts.");
 			for(String adduct : FPLists.classSpecificFragmentationPatterns.get(type).keySet()){
+				
 				System.out.println("Generating peak list for the adduct type: " + String.valueOf(adduct));
 				LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> annotatedPeaks = new LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>>();
 				LinkedHashMap<String, IAtomContainer> fragments = fragmentMolecule(standardized_mol, type, adduct);
@@ -691,11 +693,11 @@ public class Fragmenter {
         			type == ClassName.SULFATIDES || type == ClassName.FATTY_ACID_ESTERS_OF_HYDROXYL_FATTY_ACIDS ||
         			type == ClassName.ETHER_LIPIDS
         			){            	
-    			System.out.println("\nSTATUS REPORT = 4\nThe compound belongs to the lipid class of " + type + ", which is not covered "
+    			System.out.println("STATUS REPORT = 4\nThe compound belongs to a lipid class of " + type + ", which is not covered "
     					+ "in the current version of the fragmenter.");       		
         	}
         	else{
-    			System.out.println("\nSTATUS REPORT = 5\nInvalid chemical class. The query compound does not belong to any of the classes covered "
+    			System.out.println("STATUS REPORT = 5\nInvalid chemical class. The query compound does not belong to any of the classes covered "
     					+ "in the current version of the fragmenter.");         		
        	}
         }

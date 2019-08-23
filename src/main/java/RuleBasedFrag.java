@@ -279,7 +279,7 @@ public class RuleBasedFrag
 								}
 								
 							}else{
-								outputName = new File("").getAbsolutePath();
+								outputName = new File("data").getAbsolutePath();
 							}
 							
 							IAtomContainerSet atContainers = FileUtilities.parseSdfAndAddTitles(inputFileName, factory);
@@ -289,7 +289,7 @@ public class RuleBasedFrag
 								counter++;
 								String title = atc.getProperty(CDKConstants.TITLE);
 								try{
-									System.out.println(counter + " - Chemical Class : " + StructureExplorer.findClassName(atc));
+									System.out.println("MOLECULE " + counter + " - Chemical Class: " + StructureExplorer.findClassName(atc));
 //									if(title != null){
 //										System.out.println(title + " - Chemical Class : " + StructureExplorer.findClassName(atc));
 //									}
@@ -344,7 +344,7 @@ public class RuleBasedFrag
 							if((!file.exists()) & file.isDirectory()){
 								throw new IllegalArgumentException("Invalid argument: Please make sure to enter a valid existing directory name if you select the -isdf or -isdfInput option.");
 							}else{
-								
+//								System.out.println(inputFileName);
 								if(outputName != null){
 									File directory_ = new File(outputName);
 									if(!(file.exists() & directory_.exists())){
@@ -352,16 +352,22 @@ public class RuleBasedFrag
 									}
 									
 								}else{
-									outputName = new File("").getAbsolutePath();
+									outputName = new File("data").getAbsolutePath();
 								}
 								
 								IAtomContainerSet atContainers = FileUtilities.parseSdfAndAddTitles(inputFileName, factory);
 								int counter = 0;
 								
 								for(IAtomContainer atc : atContainers.atomContainers()){
+//									System.out.println(atc.isEmpty());
+//									System.out.println(atc == null);
+//									System.out.println(atc);
 									counter++;
+									System.out.println("\nMOLECULE " + counter);
+									System.out.println("TITLE: " + atc.getProperty(CDKConstants.TITLE));
 									try{
-										fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
+										String title = String.valueOf(atc.getProperty(CDKConstants.TITLE)).replace("/", "_");
+										fr.saveSingleCfmidLikeMSPeakList(atc, bldr, outputName+"/"+ title + ".log");
 									}
 						            catch(NullPointerException e){
 						            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
@@ -394,13 +400,13 @@ public class RuleBasedFrag
 							//System.out.println("NIL ATOM CONTAINER: " + (singleInput.isEmpty()));
 							//SmilesGenerator sg = new SmilesGenerator().unique();
 							//System.out.println(sg.create(singleInput));
-	//						try{
+							try{
 								fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName, adduct_list);
-	//						}
-	//			            catch(NullPointerException e){
-	//			            	System.err.println("Could not compute spectra for " + molSmiles);
-	//			            	System.err.println(e.getMessage());
-	//			            }
+							}
+				            catch(NullPointerException e){
+				            	System.err.println("Could not compute spectra for " + molSmiles);
+				            	System.err.println(e.getMessage());
+				            }
 	
 						}
 						else if(commandLine.getOptionValue("isdf") != null){
@@ -420,18 +426,22 @@ public class RuleBasedFrag
 										}
 										
 									}else{
-										outputName = new File("").getAbsolutePath();
+										outputName = new File("data").getAbsolutePath();
 									}
 									
 									IAtomContainerSet atContainers = FileUtilities.parseSdfAndAddTitles(inputFileName, factory);
 									int counter = 0;
 									
+									System.out.println(atContainers.getAtomContainerCount());
 									for(IAtomContainer atc : atContainers.atomContainers()){
 										counter++;
+										System.out.println("MOLECULE " + counter);
+										System.out.println("TITLE: " + atc.getProperty(CDKConstants.TITLE));
 										try{
-											fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
-											fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log", adduct_list);
-										
+											String title = String.valueOf(atc.getProperty(CDKConstants.TITLE)).replace("/", "_");
+//											fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ atc.getProperty(CDKConstants.TITLE) + ".log");
+											fr.saveSingleCfmidLikeMSPeakList(singleInput, bldr, outputName+"/"+ title + ".log", adduct_list);
+//										
 										}
 							            catch(NullPointerException e){
 							            	System.err.println("Could not compute spectra for molecule no. " + counter + "(" + atc.getProperty(CDKConstants.TITLE) + ")");
