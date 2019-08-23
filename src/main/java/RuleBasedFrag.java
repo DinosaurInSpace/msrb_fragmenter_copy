@@ -1,13 +1,13 @@
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+//import java.io.FileReader;
+//import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
+//import java.util.LinkedHashMap;
+//import java.util.Map;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -19,7 +19,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.DefaultChemObjectBuilder;
-import org.openscience.cdk.exception.InvalidSmilesException;
+//import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.inchi.InChIGenerator;
 import org.openscience.cdk.inchi.InChIGeneratorFactory;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -27,20 +27,20 @@ import org.openscience.cdk.interfaces.IAtomContainerSet;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.silent.SilentChemObjectBuilder;
 import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.tools.CDKHydrogenAdder;
-import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
-
-import ambit2.smarts.SMIRKSManager;
+//import org.openscience.cdk.tools.CDKHydrogenAdder;
+//import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
+//
+//import ambit2.smarts.SMIRKSManager;
 //import ambit2.
 import utils.FileUtilities;
 
-import org.openscience.cdk.smiles.SmilesGenerator;
-
-import wishartlab.cfmid_plus.fragmentation.FPLists;
-import wishartlab.cfmid_plus.fragmentation.FragmentationPattern;
+//import org.openscience.cdk.smiles.SmilesGenerator;
+//
+//import wishartlab.cfmid_plus.fragmentation.FPLists;
+//import wishartlab.cfmid_plus.fragmentation.FragmentationPattern;
 import wishartlab.cfmid_plus.fragmentation.Fragmenter;
-import wishartlab.cfmid_plus.molecules.StructuralClass.ClassName;
-import wishartlab.cfmid_plus.molecules.StructuralClass;
+//import wishartlab.cfmid_plus.molecules.StructuralClass.ClassName;
+//import wishartlab.cfmid_plus.molecules.StructuralClass;
 import wishartlab.cfmid_plus.molecules.StructureExplorer;
 
 /**
@@ -287,7 +287,7 @@ public class RuleBasedFrag
 							
 							for(IAtomContainer atc : atContainers.atomContainers()){
 								counter++;
-								String title = atc.getProperty(CDKConstants.TITLE);
+//								String title = atc.getProperty(CDKConstants.TITLE);
 								try{
 									System.out.println("MOLECULE " + counter + " - Chemical Class: " + StructureExplorer.findClassName(atc));
 //									if(title != null){

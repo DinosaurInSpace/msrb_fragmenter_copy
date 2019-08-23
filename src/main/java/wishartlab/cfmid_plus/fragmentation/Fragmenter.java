@@ -11,63 +11,48 @@ package wishartlab.cfmid_plus.fragmentation;
 import wishartlab.cfmid_plus.molecules.StructureExplorer;
 import wishartlab.cfmid_plus.molecules.StructuralClass;
 import wishartlab.cfmid_plus.molecules.StructuralClass.ClassName;
-import wishartlab.cfmid_plus.fragmentation.FragmentationPattern;
+//import wishartlab.cfmid_plus.fragmentation.FragmentationPattern;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+//import java.io.File;
+//import java.io.FileNotFoundException;
+//import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.NumberFormat;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.List;
+//import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.openscience.cdk.AtomContainer;
-import org.openscience.cdk.AtomContainerSet;
-import org.openscience.cdk.CDKConstants;
-import org.openscience.cdk.DefaultChemObjectBuilder;
+//import org.openscience.cdk.AtomContainer;
+//import org.openscience.cdk.AtomContainerSet;
+//import org.openscience.cdk.CDKConstants;
+//import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.CDKException;
-import org.openscience.cdk.exception.InvalidSmilesException;
+//import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IAtomContainerSet;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
-import org.openscience.cdk.interfaces.IMolecularFormula;
-import org.openscience.cdk.io.iterator.IteratingSDFReader;
+//import org.openscience.cdk.interfaces.IMolecularFormula;
+//import org.openscience.cdk.io.iterator.IteratingSDFReader;
 import org.openscience.cdk.silent.SilentChemObjectBuilder;
 import org.openscience.cdk.smiles.SmilesGenerator;
 import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.smiles.smarts.SmartsPattern;
+//import org.openscience.cdk.smiles.smarts.SmartsPattern;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
-import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
+//import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
 
 import ambit2.smarts.SMIRKSManager;
 import ambit2.smarts.SMIRKSReaction;
-import ambit2.smarts.query.SMARTSException;
+//import ambit2.smarts.query.SMARTSException;
 
 
 
-//import org.rosuda.REngine.*;
-//import org.rosuda.REngine.Rserve.*;
-
-import org.rosuda.REngine.REXP;
-import org.rosuda.REngine.REXPMismatchException;
-import org.rosuda.REngine.REngineException;
-import org.rosuda.REngine.RList;
-import org.rosuda.REngine.Rserve.RConnection;
-import org.rosuda.REngine.Rserve.RserveException;
-
-
-import org.rosuda.REngine.Rserve.*;
-//import RserveEngine;
-
-import org.math.R.Rsession;
 
 
 
@@ -95,24 +80,24 @@ public class Fragmenter {
 	private SMIRKSManager smrkMan = new SMIRKSManager(bldr);
 
 
-	private AtomContainerManipulator acm = new AtomContainerManipulator();
+//	private AtomContainerManipulator acm = new AtomContainerManipulator();
 	private SmilesParser sParser = new SmilesParser(SilentChemObjectBuilder.getInstance());
-	private SmilesGenerator sGen = new SmilesGenerator().isomeric();
-	private String host;
-	private int port;
+	private SmilesGenerator sGen = SmilesGenerator.isomeric();
+//	private String host;
+//	private int port;
 	StructureExplorer sExplorer = new StructureExplorer();
 
-	public void Fragmenter(){
-		this.host = "127.0.0.1";
-		this.port = 6311;
+	public Fragmenter(){
+//		this.host = "127.0.0.1";
+//		this.port = 6311;
 		this.smrkMan.setFlagFilterEquivalentMappings(true);
 	}
 	
-	public void Fragmenter(String host, int port){
-		this.host = host;
-		this.port = port;
-		this.smrkMan.setFlagFilterEquivalentMappings(true);
-	}
+//	public void Fragmenter(String host, int port){
+////		this.host = host;
+////		this.port = port;
+//		this.smrkMan.setFlagFilterEquivalentMappings(true);
+//	}
 	
 	
 	public static void main(String[] args) throws Exception{
@@ -182,7 +167,7 @@ public class Fragmenter {
     	Fragmenter fr = new Fragmenter();
 
         
-        StructureExplorer se = new StructureExplorer();
+//        StructureExplorer se = new StructureExplorer();
         IAtomContainer molecule = fr.sParser.parseSmiles(molSmiles.replace("[O-]", "O"));
         
 //       MolecularFormulaManipulator mfm = new MolecularFormulaManipulator();
@@ -201,9 +186,9 @@ public class Fragmenter {
 //        LinkedHashMap<String, Double> masses = fr.computeFragmentMasses(fragments);
 //        System.out.println(masses);
 
-        long t1 = System.nanoTime();        
+//        long t1 = System.nanoTime();        
         fr.saveSingleCfmidLikeMSPeakList(molecule, fr.bldr, adductType, outputName);
-        long t2 = System.nanoTime();
+//        long t2 = System.nanoTime();
 //        System.out.println(AtomContainerManipulator.getTotalFormalCharge(molecule));
 //        System.out.println("Execution time: " + ((t2 - t1) * 1e-6) + " milliseconds");
 	}
@@ -345,7 +330,7 @@ public class Fragmenter {
 //			LinkedHashMap<Integer,ArrayList<String>> peaks = new LinkedHashMap<Integer,ArrayList<String>>();
 			ArrayList<String> peaks = new ArrayList<String>();
 			
-			String s_peaks = "";
+//			String s_peaks = "";
 			
 //			ArrayList<String> metadata = new ArrayList<String>();
 //			ArrayList<String> molName = new ArrayList<String>();
@@ -381,7 +366,7 @@ public class Fragmenter {
 			}
 
 
-			int index = 0;
+//			int index = 0;
 //			mra.print();
 //			System.out.println("fragmentMasses: " + fragmentMassChargeRatios);
 //			System.out.println("mra.getRelativeAbundances(): " + mra.getRelativeAbundances());
@@ -465,7 +450,7 @@ public class Fragmenter {
 	}
 	
 	public LinkedHashMap<String, ArrayList<String>> generateCfmidLikeMSPeakList(IAtomContainer molecule, FragmentationCondition fragCondition) throws Exception{
-		LinkedHashMap<String, ArrayList<String>> annotatedPeaks = new LinkedHashMap<String, ArrayList<String>>();
+//		LinkedHashMap<String, ArrayList<String>> annotatedPeaks = new LinkedHashMap<String, ArrayList<String>>();
 		
 		if(fragCondition.getCollisionEnergy() == 10 || fragCondition.getCollisionEnergy() == 20 || fragCondition.getCollisionEnergy() == 40) {
 			IAtomContainer standardized_mol = this.sExplorer.standardizeMolecule(molecule);
@@ -751,9 +736,9 @@ public class Fragmenter {
 	public void saveSingleCfmidLikeMSPeakList(IAtomContainer molecule, IChemObjectBuilder bldr, String adductType, String outputname) throws Exception{
 
 		FileWriter fwerr = new FileWriter("data/missing.log");
-		BufferedWriter bwerr = new BufferedWriter(fwerr);		
+//		BufferedWriter bwerr = new BufferedWriter(fwerr);		
 
-		int fmol = 0;
+//		int fmol = 0;
 
 //			LinkedHashMap<String,ArrayList<String>> peaksResults = generateCfmidLikeMSPeakList(molecule, adductType);
 			LinkedHashMap<Integer, LinkedHashMap<String, ArrayList<String>>> peaksResults = generateCfmidLikeMSPeakList(molecule, adductType);

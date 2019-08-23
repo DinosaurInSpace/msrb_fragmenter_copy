@@ -6,18 +6,18 @@
 
 package utils;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+//import java.io.OutputStreamWriter;
+//import java.io.Writer;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -25,7 +25,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.CDKException;
-import org.openscience.cdk.exception.InvalidSmilesException;
+//import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.inchi.InChIGenerator;
 import org.openscience.cdk.inchi.InChIGeneratorFactory;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -34,9 +34,9 @@ import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.io.SDFWriter;
 import org.openscience.cdk.io.iterator.IteratingSDFReader;
 import org.openscience.cdk.silent.SilentChemObjectBuilder;
-import org.openscience.cdk.smiles.SmilesGenerator;
-import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
+//import org.openscience.cdk.smiles.SmilesGenerator;
+//import org.openscience.cdk.smiles.SmilesParser;
+//import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -166,7 +166,7 @@ public class FileUtilities {
 	
 	public static void saveAtomContainerSetsToCSV(IAtomContainerSet products, String outputFileName) throws Exception{
 
-		LinkedHashMap<Object, Object> properties = new LinkedHashMap<Object, Object>();
+//		LinkedHashMap<Object, Object> properties = new LinkedHashMap<Object, Object>();
 		
 		if(products.getAtomContainerCount() > 0){
 			

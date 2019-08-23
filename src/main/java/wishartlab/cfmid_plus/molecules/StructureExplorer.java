@@ -24,11 +24,11 @@ import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.interfaces.IMolecularFormula;
 import org.openscience.cdk.isomorphism.Pattern;
 import org.openscience.cdk.silent.SilentChemObjectBuilder;
-import org.openscience.cdk.smiles.SmilesGenerator;
-import org.openscience.cdk.smiles.smarts.SMARTSQueryTool;
+//import org.openscience.cdk.smiles.SmilesGenerator;
+//import org.openscience.cdk.smiles.smarts.SMARTSQueryTool;
 import org.openscience.cdk.smiles.smarts.SmartsPattern;
 import org.openscience.cdk.tools.CDKHydrogenAdder;
-import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
+//import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
 
 import ambit2.smarts.SMIRKSManager;
@@ -40,7 +40,7 @@ import ambit2.smarts.query.SmartsPatternCDK;
 public class StructureExplorer extends AtomContainer  {
 	ArrayList<SMIRKSReaction> standardizationReactions = new ArrayList<SMIRKSReaction>();
 	SMIRKSManager smrkMan = new SMIRKSManager(SilentChemObjectBuilder.getInstance());
-	SmilesGenerator smiGen = new SmilesGenerator().isomeric();
+//	SmilesGenerator smiGen = new SmilesGenerator().isomeric();
 	
 	public StructureExplorer(){
 		setUpStandardizer();
@@ -106,8 +106,8 @@ public class StructureExplorer extends AtomContainer  {
 	
 	public static boolean isFAHFA(IAtomContainer molecule) throws SMARTSException, CDKException{
 		boolean isFahfa = false;
-		String pattern1 = "";
-		String pattern2 = "";
+//		String pattern1 = "";
+//		String pattern2 = "";
 //		String carboxyl_head = "[H][#6;R0]-[#6;R0]([H])-[#6;R0]([H])-[#6;X3]([#8;A;X1-,X2H1])=[O;X1]";
 //		String ester_head    = "[H][#6;R0]-[#6;R0]([H])-[#6;R0]([H])-[#6;X3](=[O;X1])[#8;A;X2R0][C;R0]([H])([#6;R0])[#6;R0][H]";
 
@@ -170,7 +170,7 @@ public class StructureExplorer extends AtomContainer  {
 	 */
 	public static boolean inchiEqualityHolds(IAtomContainer mol1, IAtomContainer mol2)
 			throws CDKException {
-		boolean equal = false;
+//		boolean equal = false;
 
 		// Generate factory - throws CDKException if native code does not load
 		InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
@@ -248,8 +248,8 @@ public class StructureExplorer extends AtomContainer  {
 		
 		IAtomContainer mol_no_hydro = AtomContainerManipulator.removeHydrogens(molecule);
 //		AtomContainerManipulator.convertImplicitToExplicitHydrogens(mol_no_hydro);
-		SmilesGenerator sg = new SmilesGenerator().unique();
-		String molecule_c = sg.create(mol_no_hydro);
+//		SmilesGenerator sg = new SmilesGenerator().unique();
+//		String molecule_c = sg.create(mol_no_hydro);
 //		System.out.println(molecule_c);
 		
 		switch (type) {
@@ -345,7 +345,7 @@ public class StructureExplorer extends AtomContainer  {
 				CDKHydrogenAdder adder = CDKHydrogenAdder.getInstance(molecule.getBuilder());
 				adder.addImplicitHydrogens(molecule);
 				AtomContainerManipulator.convertImplicitToExplicitHydrogens(molecule);
-				SmilesGenerator smiGen = new SmilesGenerator().isomeric();
+//				SmilesGenerator smiGen = new SmilesGenerator().isomeric();
 //				System.err.println(smiGen.create(molecule));
 				boolean status = smp.matches(molecule);
 //				System.out.println("status: " + status);				
@@ -404,8 +404,8 @@ public class StructureExplorer extends AtomContainer  {
 
 	public static double getMajorIsotopeMass(IAtomContainer molecule){
 //		Double mass;		
-        MolecularFormulaManipulator mfm = new MolecularFormulaManipulator();
-        IMolecularFormula m = mfm.getMolecularFormula(molecule);		
+//        MolecularFormulaManipulator mfm = new MolecularFormulaManipulator();
+        IMolecularFormula m = MolecularFormulaManipulator.getMolecularFormula(molecule);		
 		return MolecularFormulaManipulator.getMajorIsotopeMass(m);
 	}
 	

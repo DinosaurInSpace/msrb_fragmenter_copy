@@ -1,29 +1,29 @@
 package cfmid_plus;
 
 import org.openscience.cdk.silent.SilentChemObjectBuilder;
-import org.openscience.cdk.smiles.SmilesGenerator;
+//import org.openscience.cdk.smiles.SmilesGenerator;
 import org.openscience.cdk.smiles.SmilesParser;
 
 import wishartlab.cfmid_plus.molecules.StructureExplorer;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
+//import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import org.apache.commons.io.FilenameUtils;
-import org.openscience.cdk.AtomContainer;
-import org.openscience.cdk.AtomContainerSet;
+//import org.apache.commons.io.FilenameUtils;
+//import org.openscience.cdk.AtomContainer;
+//import org.openscience.cdk.AtomContainerSet;
 import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.io.SDFWriter;
+//import org.openscience.cdk.io.SDFWriter;
 
 
 public class Test {
 
 	public static void add_mass(String tsvFileName, String outputFileName) throws Exception{
         SmilesParser sp =  new SmilesParser(SilentChemObjectBuilder.getInstance());
-        SmilesGenerator sg = new SmilesGenerator().unique();
+//        SmilesGenerator sg = new SmilesGenerator().unique();
         
 		BufferedReader bRead = new BufferedReader(new FileReader(tsvFileName));
 		int counter = 0;
@@ -48,6 +48,7 @@ public class Test {
 		}
 		
 		bw0.close();
+		bRead.close();
 		
 	}
 	public static void main(String[] args) throws Exception{

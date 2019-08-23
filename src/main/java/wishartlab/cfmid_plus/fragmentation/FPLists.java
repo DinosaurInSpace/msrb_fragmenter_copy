@@ -30,7 +30,7 @@ public class FPLists {
 		 *  in normal and dry eye tear lipidomes by electrospray tandem mass spectrometry; J Mass Spectrom. 2004 Nov; 39(11): 1321–1336; doi: 10.1002/jms.725
 		 */
 		
-		LinkedHashMap<String, String[]> _1_mg_h = new LinkedHashMap<String, String[]>();
+//		LinkedHashMap<String, String[]> _1_mg_h = new LinkedHashMap<String, String[]>();
 		LinkedHashMap<String, String[]> _1_mg_m_li = new LinkedHashMap<String, String[]>();
 		LinkedHashMap<String, String[]> _1_mg_m_nh4 = new LinkedHashMap<String, String[]>();
 		LinkedHashMap<String,FragmentationPattern> _1_mg = new LinkedHashMap<String,FragmentationPattern>();
@@ -746,7 +746,7 @@ public class FPLists {
 		LinkedHashMap<String, String[]> pc_frag_m_h 	= new LinkedHashMap<String, String[]>();
 		LinkedHashMap<String, String[]> pc_frag_m_na 	= new LinkedHashMap<String, String[]>();
 		LinkedHashMap<String, String[]> pc_frag_m_li 	= new LinkedHashMap<String, String[]>();
-		LinkedHashMap<String, String[]> pc_frag_m_k 	= new LinkedHashMap<String, String[]>();
+//		LinkedHashMap<String, String[]> pc_frag_m_k 	= new LinkedHashMap<String, String[]>();
 		LinkedHashMap<String, String[]> pc_frag_m_cl_ 	= new LinkedHashMap<String, String[]>();
 		
 		pc_frag_m_h.put("[M+H]+", new String[]{

@@ -1,6 +1,6 @@
 package wishartlab.cfmid_plus.fragmentation;
 
-import wishartlab.cfmid_plus.molecules.StructuralClass.ClassName;
+//import wishartlab.cfmid_plus.molecules.StructuralClass.ClassName;
 
 public class FragmentationCondition {
 	
